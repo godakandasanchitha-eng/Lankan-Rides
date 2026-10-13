@@ -89,6 +89,12 @@ const testimonials = [
       'A comfortable ride, a beautiful route, and a relaxed day for our family. We came away with some wonderful memories.',
   },
 ]
+
+const { app } = useRuntimeConfig()
+
+function publicAsset(path: string) {
+  return `${app.baseURL}${path.replace(/^\/+/, '')}`
+}
 </script>
 
 <template>
@@ -104,7 +110,10 @@ const testimonials = [
       playsinline
       aria-hidden="true"
     >
-      <source src="/hill-country-scenic-shot.mp4" type="video/mp4" />
+      <source
+        :src="publicAsset('/hill-country-scenic-shot.mp4')"
+        type="video/mp4"
+      />
     </video>
 
     <div class="absolute inset-0 z-10 bg-black/40"></div>
@@ -293,7 +302,7 @@ const testimonials = [
           "
         >
           <img
-            :src="destination.image"
+            :src="publicAsset(destination.image)"
             :alt="destination.name"
             loading="lazy"
             class="absolute inset-0 -z-20 size-full object-cover transition duration-500 group-hover:scale-105"
@@ -352,7 +361,7 @@ const testimonials = [
         >
           <div class="relative overflow-hidden bg-[#f5f3ed]">
             <img
-              :src="vehicle.image"
+              :src="publicAsset(vehicle.image)"
               :alt="vehicle.name"
               loading="lazy"
               class="h-56 w-full object-cover transition duration-500 group-hover:scale-105 sm:h-64"
