@@ -13,10 +13,14 @@ export default defineNuxtConfig({
     },
   },
   app: {
+    baseURL: process.env.NUXT_APP_BASE_URL || '/',
     head: {
       title: 'Lanka Rides | Explore Sri Lanka in Comfort',
       meta: [
-        { name: 'description', content: 'Private rides, airport transfers, and island tours across Sri Lanka.' },
+        {
+          name: 'description',
+          content: 'Private rides, airport transfers, and island tours across Sri Lanka.',
+        },
         { name: 'theme-color', content: '#f8f7f3' },
       ],
     },
