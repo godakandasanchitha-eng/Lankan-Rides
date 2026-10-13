@@ -3,7 +3,12 @@ import { onMounted, onBeforeUnmount, ref } from 'vue'
 
 const isScrollingUp = ref(false)
 const route = useRoute()
+const { app } = useRuntimeConfig()
 let previousScrollY = 0
+
+function publicAsset(path: string) {
+  return `${app.baseURL}${path.replace(/^\/+/, '')}`
+}
 
 function handleScroll() {
   const currentScrollY = window.scrollY
@@ -47,7 +52,7 @@ onBeforeUnmount(() => {
           >
             <span class="flex size-13 shrink-0 items-center justify-center overflow-hidden rounded-full bg-white">
               <img
-                src="/lankan-rides-logo.png"
+                :src="publicAsset('/lankan-rides-logo.png')"
                 alt=""
                 class="size-full object-contain"
               />
@@ -118,7 +123,7 @@ onBeforeUnmount(() => {
         >
           <!-- Larger SUV overlaps the top and left edges of the banner -->
           <img
-            src="/SUV-CTA.png"
+            :src="publicAsset('/SUV-CTA.png')"
             alt="SUV packed and ready for a Sri Lankan road trip"
             class="absolute left-1/2 top-0 z-10 h-64 w-80 -translate-x-1/2 -translate-y-1/2 object-contain md:left-[-150px] md:top-1/2 md:h-[500px] md:w-[620px] md:translate-x-0 md:-translate-y-[55%]"
           />
@@ -161,7 +166,7 @@ onBeforeUnmount(() => {
           >
             <span class="flex size-12 items-center justify-center overflow-hidden rounded-full bg-white">
               <img
-                src="/lankan-rides-logo.png"
+                :src="publicAsset('/lankan-rides-logo.png')"
                 alt="Lankan Rides"
                 class="size-full object-contain"
               />
