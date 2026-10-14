@@ -29,21 +29,21 @@ const destinations = [
 
 const vehicles = [
   {
-    name: 'Toyota Premio',
+    name: 'Saloon',
     type: 'Saloon',
     fuel: 'Petrol',
     image: '/Premio.webp',
     description: 'A comfortable choice for city trips and airport transfers.',
   },
   {
-    name: 'Toyota RAV4',
+    name: 'SUV',
     type: 'SUV',
     fuel: 'Petrol',
     image: '/RAV 4.webp',
     description: 'Extra room and a higher ride for exploring the island.',
   },
   {
-    name: 'Honda Civic',
+    name: 'Sedan',
     type: 'Sedan',
     fuel: 'Petrol',
     image: '/Civic.webp',
@@ -122,13 +122,13 @@ function publicAsset(path: string) {
       class="relative z-20 mx-auto flex min-h-[85svh] max-w-7xl items-center px-6 pt-1 pb-32 lg:px-16"
     >
       <div class="mx-auto max-w-2xl text-center text-white">
-        <p class="text-xs font-semibold uppercase tracking-[0.2em] text-[#FFA500]">
+        <p class="text-xs font-semibold uppercase tracking-[0.2em] text-[#f97316]">
           Private rides · Local knowledge
         </p>
 
         <h1 class="mt-5 text-4xl font-semibold leading-tight md:text-5xl">
           Discover Sri Lanka,
-          <span class="text-[#FFA500]">one ride at a time.</span>
+          <span class="text-[#f97316]">one ride at a time.</span>
         </h1>
 
         <p class="mx-auto mt-6 max-w-xl text-base leading-7 text-white/85 md:text-lg">
@@ -138,14 +138,14 @@ function publicAsset(path: string) {
         <div class="mt-8 flex flex-wrap justify-center gap-4">
           <NuxtLink
             to="/booking"
-            class="rounded-full border border-transparent bg-[#FFA500] px-6 py-4 font-semibold text-[#18392d] transition-colors hover:border-white hover:bg-transparent hover:text-white focus:outline-none focus:ring-2 focus:ring-[#FFA500] focus:ring-offset-2"
+            class="rounded-full border border-transparent bg-[#f97316] px-6 py-4 font-semibold text-[#18392d] transition-colors hover:border-white hover:bg-transparent hover:text-white focus:outline-none focus:ring-2 focus:ring-[#f97316] focus:ring-offset-2"
           >
             Plan your ride
           </NuxtLink>
 
           <NuxtLink
             to="/destinations"
-            class="rounded-full border border-white/70 px-6 py-4 font-semibold text-white transition-colors hover:border-[#FFA500] hover:bg-[#FFA500] hover:text-black"
+            class="rounded-full border border-white/70 px-6 py-4 font-semibold text-white transition-colors hover:border-[#f97316] hover:bg-[#f97316] hover:text-black"
           >
             Explore destinations
           </NuxtLink>
@@ -154,119 +154,75 @@ function publicAsset(path: string) {
     </div>
   </section>
 
-  <!-- Why travel with us -->
+  <!-- Our vehicles -->
   <section class="bg-white px-6 py-16 text-[#20231f] md:px-10 md:py-20">
     <div class="mx-auto max-w-7xl">
       <div class="mx-auto max-w-2xl text-center">
         <p class="text-xs font-semibold uppercase tracking-[0.2em] text-[#bd6b28]">
-          The Lankan Rides difference
+          Find your perfect ride
         </p>
 
         <h2 class="mt-3 text-3xl font-semibold tracking-tight md:text-4xl">
-          More than just a ride
+          Choose your way around the island
         </h2>
 
         <p class="mt-4 text-base leading-7 text-[#6b6d68]">
-          Enjoy a smoother way to explore Sri Lanka, with thoughtful service from
-          your first pickup to your final stop.
+          From comfortable city rides to roomier adventures, choose a vehicle
+          that suits your journey.
         </p>
       </div>
 
-      <div class="mt-12 grid gap-8 md:grid-cols-3">
-        <!-- Feature 1 -->
-        <article class="rounded-2xl border border-[#eceae4] bg-[#faf9f6] p-7">
-          <div class="flex size-12 items-center justify-center rounded-xl bg-[#fff0d6] text-[#bd6b28]">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              class="size-6"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-              stroke-width="1.8"
-              aria-hidden="true"
+      <div class="mt-10 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+        <article
+          v-for="vehicle in vehicles"
+          :key="vehicle.name"
+          class="group overflow-hidden rounded-2xl border border-[#eceae4] bg-white shadow-sm transition duration-300 hover:-translate-y-1 hover:shadow-xl"
+        >
+          <div class="relative overflow-hidden bg-[#f5f3ed]">
+            <img
+              :src="publicAsset(vehicle.image)"
+              :alt="vehicle.name"
+              loading="lazy"
+              class="h-56 w-full object-cover transition duration-500 group-hover:scale-105 sm:h-64"
+            />
+
+            <span
+              class="absolute left-4 top-4 rounded-full bg-white/95 px-3 py-1.5 text-xs font-semibold text-[#20231f] shadow-sm"
             >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                d="M12 21s7-4.35 7-11a7 7 0 1 0-14 0c0 6.65 7 11 7 11Z"
-              />
-              <circle cx="12" cy="10" r="2.25" />
-            </svg>
+              {{ vehicle.type }}
+            </span>
           </div>
 
-          <h3 class="mt-5 text-lg font-semibold">Local knowledge</h3>
-          <p class="mt-2 text-sm leading-6 text-[#6b6d68]">
-            Get helpful local insight and a more personal journey as you travel
-            between Sri Lanka’s highlights.
-          </p>
-        </article>
+          <div class="p-6">
+            <div class="flex flex-wrap items-center gap-2">
+              <span class="rounded-full bg-[#ffedd5] px-3 py-1 text-xs font-semibold text-[#8f4c18]">
+                {{ vehicle.fuel }}
+              </span>
+              <span class="rounded-full bg-[#f2f2ef] px-3 py-1 text-xs font-medium text-[#5f625d]">
+                Private ride
+              </span>
+            </div>
 
-        <!-- Feature 2 -->
-        <article class="rounded-2xl border border-[#eceae4] bg-[#faf9f6] p-7">
-          <div class="flex size-12 items-center justify-center rounded-xl bg-[#fff0d6] text-[#bd6b28]">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              class="size-6"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-              stroke-width="1.8"
-              aria-hidden="true"
+            <h3 class="mt-4 text-xl font-semibold">
+              {{ vehicle.name }}
+            </h3>
+
+            <p class="mt-2 text-sm leading-6 text-[#6b6d68]">
+              {{ vehicle.description }}
+            </p>
+
+            <NuxtLink
+              to="/booking"
+              class="mt-5 inline-flex items-center gap-2 text-sm font-semibold text-[#a85e20] transition-colors hover:text-[#754016]"
             >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                d="M3 13.5 4.5 8h15l1.5 5.5v5h-3v-2H6v2H3v-5Z"
-              />
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                d="M6.5 13h11M7 8l1-3h8l1 3"
-              />
-              <circle cx="7.5" cy="13.5" r=".75" fill="currentColor" />
-              <circle cx="16.5" cy="13.5" r=".75" fill="currentColor" />
-            </svg>
+              Book this vehicle
+              <span aria-hidden="true">→</span>
+            </NuxtLink>
           </div>
-
-          <h3 class="mt-5 text-lg font-semibold">Comfort for the journey</h3>
-          <p class="mt-2 text-sm leading-6 text-[#6b6d68]">
-            Choose a ride that suits your trip, from airport transfers to
-            comfortable drives around the island.
-          </p>
         </article>
+      </div>
 
-        <!-- Feature 3 -->
-        <article class="rounded-2xl border border-[#eceae4] bg-[#faf9f6] p-7">
-          <div class="flex size-12 items-center justify-center rounded-xl bg-[#fff0d6] text-[#bd6b28]">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              class="size-6"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-              stroke-width="1.8"
-              aria-hidden="true"
-            >
-              <circle cx="12" cy="12" r="9" />
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                d="M12 7v5l3.5 2"
-              />
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                d="M7 3.8 5.5 5.3M17 3.8l1.5 1.5"
-              />
-            </svg>
-          </div>
-
-          <h3 class="mt-5 text-lg font-semibold">Flexible travel plans</h3>
-          <p class="mt-2 text-sm leading-6 text-[#6b6d68]">
-            Plan around your schedule, add stops along the way, and make more
-            time for the places you want to see.
-          </p>
-        </article>
+      <div class="mt-9 text-center">
       </div>
     </div>
   </section>
@@ -326,89 +282,10 @@ function publicAsset(path: string) {
       <div class="mt-8 text-center">
         <NuxtLink
           to="/destinations"
-          class="inline-flex items-center justify-center rounded-full bg-[#FFA500] px-6 py-3 font-semibold text-black transition-colors hover:bg-[#e69500] focus:outline-none focus:ring-2 focus:ring-[#FFA500] focus:ring-offset-2"
+          class="inline-flex items-center justify-center rounded-full bg-[#f97316] px-6 py-3 font-semibold text-black transition-colors hover:bg-[#ea580c] focus:outline-none focus:ring-2 focus:ring-[#f97316] focus:ring-offset-2"
         >
           Explore Destinations
           <span class="ml-2" aria-hidden="true">→</span>
-        </NuxtLink>
-      </div>
-    </div>
-  </section>
-
-  <!-- Our vehicles -->
-  <section class="bg-white px-6 py-16 text-[#20231f] md:px-10 md:py-20">
-    <div class="mx-auto max-w-7xl">
-      <div class="mx-auto max-w-2xl text-center">
-        <p class="text-xs font-semibold uppercase tracking-[0.2em] text-[#bd6b28]">
-          Find your perfect ride
-        </p>
-
-        <h2 class="mt-3 text-3xl font-semibold tracking-tight md:text-4xl">
-          Choose your way around the island
-        </h2>
-
-        <p class="mt-4 text-base leading-7 text-[#6b6d68]">
-          From comfortable city rides to roomier adventures, choose a vehicle
-          that suits your journey.
-        </p>
-      </div>
-
-      <div class="mt-10 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-        <article
-          v-for="vehicle in vehicles"
-          :key="vehicle.name"
-          class="group overflow-hidden rounded-2xl border border-[#eceae4] bg-white shadow-sm transition duration-300 hover:-translate-y-1 hover:shadow-xl"
-        >
-          <div class="relative overflow-hidden bg-[#f5f3ed]">
-            <img
-              :src="publicAsset(vehicle.image)"
-              :alt="vehicle.name"
-              loading="lazy"
-              class="h-56 w-full object-cover transition duration-500 group-hover:scale-105 sm:h-64"
-            />
-
-            <span
-              class="absolute left-4 top-4 rounded-full bg-white/95 px-3 py-1.5 text-xs font-semibold text-[#20231f] shadow-sm"
-            >
-              {{ vehicle.type }}
-            </span>
-          </div>
-
-          <div class="p-6">
-            <div class="flex flex-wrap items-center gap-2">
-              <span class="rounded-full bg-[#fff0d6] px-3 py-1 text-xs font-semibold text-[#8f4c18]">
-                {{ vehicle.fuel }}
-              </span>
-              <span class="rounded-full bg-[#f2f2ef] px-3 py-1 text-xs font-medium text-[#5f625d]">
-                Private ride
-              </span>
-            </div>
-
-            <h3 class="mt-4 text-xl font-semibold">
-              {{ vehicle.name }}
-            </h3>
-
-            <p class="mt-2 text-sm leading-6 text-[#6b6d68]">
-              {{ vehicle.description }}
-            </p>
-
-            <NuxtLink
-              to="/booking"
-              class="mt-5 inline-flex items-center gap-2 text-sm font-semibold text-[#a85e20] transition-colors hover:text-[#754016]"
-            >
-              Book this vehicle
-              <span aria-hidden="true">→</span>
-            </NuxtLink>
-          </div>
-        </article>
-      </div>
-
-      <div class="mt-9 text-center">
-        <NuxtLink
-          to="/fleet"
-          class="inline-flex items-center justify-center rounded-full border border-[#20231f] px-6 py-3 font-semibold text-[#20231f] transition-colors hover:bg-[#20231f] hover:text-white"
-        >
-          View our fleet
         </NuxtLink>
       </div>
     </div>
@@ -449,7 +326,7 @@ function publicAsset(path: string) {
                 :class="
                   index === 2
                     ? 'bg-white/15 text-white'
-                    : 'bg-[#fff0d6] text-[#8f4c18]'
+                    : 'bg-[#ffedd5] text-[#8f4c18]'
                 "
                 aria-hidden="true"
               >
@@ -468,7 +345,7 @@ function publicAsset(path: string) {
             </div>
 
             <span
-              class="shrink-0 text-sm tracking-[0.12em] text-[#e6a800]"
+              class="shrink-0 text-sm tracking-[0.12em] text-[#f97316]"
               aria-label="5 out of 5 stars"
             >
               ★★★★★

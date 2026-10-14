@@ -21,8 +21,8 @@ function handleScroll() {
 
 function navLinkClass(path: string) {
   return route.path === path
-    ? 'bg-[#FFA500] text-black'
-    : 'text-white/85 hover:bg-[#FFA500] hover:text-black'
+    ? 'bg-[#f97316] text-black'
+    : 'text-white/85 hover:bg-[#f97316] hover:text-black'
 }
 
 onMounted(() => {
@@ -86,14 +86,6 @@ onBeforeUnmount(() => {
             </NuxtLink>
 
             <NuxtLink
-              to="/fleet"
-              class="rounded-full px-4 py-2.5 text-sm font-medium transition-colors"
-              :class="navLinkClass('/fleet')"
-            >
-              Our Fleet
-            </NuxtLink>
-
-            <NuxtLink
               to="/about"
               class="rounded-full px-4 py-2.5 text-sm font-medium transition-colors"
               :class="navLinkClass('/about')"
@@ -105,7 +97,7 @@ onBeforeUnmount(() => {
           <!-- Contact button -->
           <NuxtLink
             to="/booking"
-            class="justify-self-end rounded-full bg-[#FFA500] px-4 py-2.5 text-sm font-semibold text-black transition-colors hover:bg-[#e69500] sm:px-5"
+            class="justify-self-end rounded-full bg-[#f97316] px-4 py-2.5 text-sm font-semibold text-black transition-colors hover:bg-[#ea580c] sm:px-5"
           >
             Contact us
           </NuxtLink>
@@ -144,7 +136,7 @@ onBeforeUnmount(() => {
 
             <NuxtLink
               to="/booking"
-              class="mt-5 inline-flex items-center justify-center rounded-full bg-white px-6 py-3 text-sm font-semibold text-[#20231f] transition-colors hover:bg-[#FFA500] focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-[#242124]"
+              class="mt-5 inline-flex items-center justify-center rounded-full bg-white px-6 py-3 text-sm font-semibold text-[#20231f] transition-colors hover:bg-[#f97316] focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-[#242124]"
             >
               Book Now
               <span class="ml-2" aria-hidden="true">→</span>
@@ -184,9 +176,9 @@ onBeforeUnmount(() => {
         <div>
           <h2 class="text-sm font-semibold">Company</h2>
           <ul class="mt-4 space-y-3 text-sm text-white/65">
-            <li><NuxtLink to="/about" class="hover:text-[#FFA500]">About Us</NuxtLink></li>
-            <li><NuxtLink to="/services" class="hover:text-[#FFA500]">Our Services</NuxtLink></li>
-            <li><NuxtLink to="/fleet" class="hover:text-[#FFA500]">Our Fleet</NuxtLink></li>
+            <li><NuxtLink to="/about" class="hover:text-[#f97316]">About Us</NuxtLink></li>
+            <li><NuxtLink to="/services" class="hover:text-[#f97316]">Our Services</NuxtLink></li>
+            <li><NuxtLink to="/fleet" class="hover:text-[#f97316]">Our Fleet</NuxtLink></li>
           </ul>
         </div>
 
@@ -194,9 +186,9 @@ onBeforeUnmount(() => {
         <div>
           <h2 class="text-sm font-semibold">Support</h2>
           <ul class="mt-4 space-y-3 text-sm text-white/65">
-            <li><NuxtLink to="/booking" class="hover:text-[#FFA500]">Contact Us</NuxtLink></li>
-            <li><NuxtLink to="/booking" class="hover:text-[#FFA500]">Plan a Ride</NuxtLink></li>
-            <li><NuxtLink to="/destinations" class="hover:text-[#FFA500]">Travel Information</NuxtLink></li>
+            <li><NuxtLink to="/booking" class="hover:text-[#f97316]">Contact Us</NuxtLink></li>
+            <li><NuxtLink to="/booking" class="hover:text-[#f97316]">Plan a Ride</NuxtLink></li>
+            <li><NuxtLink to="/destinations" class="hover:text-[#f97316]">Travel Information</NuxtLink></li>
           </ul>
         </div>
 
@@ -205,12 +197,12 @@ onBeforeUnmount(() => {
           <h2 class="text-sm font-semibold">Contact Us</h2>
           <ul class="mt-4 space-y-3 text-sm text-white/65">
             <li>
-              <a href="tel:+94112345678" class="hover:text-[#FFA500]">
+              <a href="tel:+94112345678" class="hover:text-[#f97316]">
                 +94 11 234 5678
               </a>
             </li>
             <li>
-              <a href="mailto:hello@lankanrides.lk" class="hover:text-[#FFA500]">
+              <a href="mailto:hello@lankanrides.lk" class="hover:text-[#f97316]">
                 hello@lankanrides.lk
               </a>
             </li>
