@@ -30,22 +30,43 @@ const destinations = [
 const vehicles = [
   {
     name: 'Saloon',
+    subtitle: 'City & Airport Transfer',
     type: 'Saloon',
     fuel: 'Petrol',
+    transmission: 'Automatic',
+    capacity: '500km',
+    class: 'Standard',
+    seats: '4 Seats',
+    rating: '4.9',
+    reviews: '100+',
     image: '/Premio.webp',
     description: 'A comfortable choice for city trips and airport transfers.',
   },
   {
     name: 'SUV',
+    subtitle: 'Island Explorer',
     type: 'SUV',
     fuel: 'Petrol',
+    transmission: 'Automatic',
+    capacity: '600km',
+    class: 'Premium',
+    seats: '5 Seats',
+    rating: '4.8',
+    reviews: '85+',
     image: '/RAV 4.webp',
     description: 'Extra room and a higher ride for exploring the island.',
   },
   {
     name: 'Sedan',
+    subtitle: 'Long Distance Comfort',
     type: 'Sedan',
     fuel: 'Petrol',
+    transmission: 'Automatic',
+    capacity: '550km',
+    class: 'Comfort',
+    seats: '4 Seats',
+    rating: '5.0',
+    reviews: '120+',
     image: '/Civic.webp',
     description: 'A refined, spacious ride for longer journeys.',
   },
@@ -172,51 +193,67 @@ function publicAsset(path: string) {
         </p>
       </div>
 
+      <!-- Vehicle Cards Grid -->
       <div class="mt-10 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
         <article
           v-for="vehicle in vehicles"
           :key="vehicle.name"
-          class="group overflow-hidden rounded-2xl border border-[#eceae4] bg-white shadow-sm transition duration-300 hover:-translate-y-1 hover:shadow-xl"
+          class="group overflow-hidden rounded-3xl border border-[#eceae4] bg-white p-6 shadow-sm transition duration-300 hover:-translate-y-1 hover:shadow-xl"
         >
-          <div class="relative overflow-hidden bg-[#f5f3ed]">
+          <!-- Top: Name/Subtitle & Rating -->
+          <div class="flex items-start justify-between gap-4">
+            <div>
+              <h3 class="text-xl font-bold text-[#20231f]">
+                {{ vehicle.name }}
+              </h3>
+              <p class="mt-0.5 text-sm text-[#6b6d68]">
+                {{ vehicle.subtitle }}
+              </p>
+            </div>
+            <div class="flex items-center gap-1 text-sm font-semibold text-[#20231f]">
+              <span class="text-amber-500">★</span>
+              <span>{{ vehicle.rating }}</span>
+              <span class="text-xs text-[#6b6d68]">({{ vehicle.reviews }})</span>
+            </div>
+          </div>
+
+          <!-- Car Image Container (Overflow hidden + rounded corners maintained on hover) -->
+          <div class="relative my-4 overflow-hidden rounded-2xl">
             <img
               :src="publicAsset(vehicle.image)"
               :alt="vehicle.name"
               loading="lazy"
-              class="h-56 w-full object-cover transition duration-500 group-hover:scale-105 sm:h-64"
+              class="h-48 w-full rounded-2xl object-cover transition duration-500 group-hover:scale-105 sm:h-52"
             />
-
-            <span
-              class="absolute left-4 top-4 rounded-full bg-white/95 px-3 py-1.5 text-xs font-semibold text-[#20231f] shadow-sm"
-            >
-              {{ vehicle.type }}
-            </span>
           </div>
 
-          <div class="p-6">
-            <div class="flex flex-wrap items-center gap-2">
-              <span class="rounded-full bg-[#ffedd5] px-3 py-1 text-xs font-semibold text-[#8f4c18]">
-                {{ vehicle.fuel }}
-              </span>
-              <span class="rounded-full bg-[#f2f2ef] px-3 py-1 text-xs font-medium text-[#5f625d]">
-                Private ride
-              </span>
+          <!-- Feature Badges Row (Icon + Category Attribute) -->
+          <div class="grid grid-cols-2 gap-y-2.5 py-3 text-xs font-medium text-[#5f625d] sm:flex sm:flex-wrap sm:items-center sm:justify-between border-b border-[#eceae4]">
+            <div class="flex items-center gap-1.5">
+              <span aria-hidden="true">🚗</span>
+              <span>{{ vehicle.transmission }}</span>
             </div>
+            <div class="flex items-center gap-1.5">
+              <span aria-hidden="true">⚡</span>
+              <span>{{ vehicle.capacity }}</span>
+            </div>
+            <div class="flex items-center gap-1.5">
+              <span aria-hidden="true">⭐</span>
+              <span>{{ vehicle.class }}</span>
+            </div>
+            <div class="flex items-center gap-1.5">
+              <span aria-hidden="true">💺</span>
+              <span>{{ vehicle.seats }}</span>
+            </div>
+          </div>
 
-            <h3 class="mt-4 text-xl font-semibold">
-              {{ vehicle.name }}
-            </h3>
-
-            <p class="mt-2 text-sm leading-6 text-[#6b6d68]">
-              {{ vehicle.description }}
-            </p>
-
+          <!-- Action Button (Turns vibrant orange on hover) -->
+          <div class="mt-5">
             <NuxtLink
               to="/booking"
-              class="mt-5 inline-flex items-center gap-2 text-sm font-semibold text-[#a85e20] transition-colors hover:text-[#754016]"
+              class="flex w-full items-center justify-center rounded-2xl bg-[#20231f] py-4 text-center font-semibold text-white transition-colors hover:bg-[#f97316] hover:text-black focus:outline-none focus:ring-2 focus:ring-[#f97316] focus:ring-offset-2"
             >
               Book this vehicle
-              <span aria-hidden="true">→</span>
             </NuxtLink>
           </div>
         </article>

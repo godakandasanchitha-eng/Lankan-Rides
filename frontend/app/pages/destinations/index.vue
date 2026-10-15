@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { onBeforeUnmount, onMounted, ref } from 'vue'
+import { ref, computed, onMounted, onBeforeUnmount } from 'vue'
 import { destinationsData as destinations } from '~/Data/destinations'
 
 const { app } = useRuntimeConfig()
@@ -11,20 +11,70 @@ function publicAsset(path: string) {
 const currentSlide = ref(0)
 let autoSlideInterval: ReturnType<typeof setInterval> | null = null
 
+interface Tour {
+  slug: string
+  name: string
+  eyebrow: string
+  duration: string
+  description: string
+  image: string
+}
+
+const topTours: Tour[] = [
+  {
+    slug: 'ella-mountain-escape',
+    name: 'Ella Mountain Escape',
+    eyebrow: '/ Top Tours',
+    duration: '5 Days / 4 Nights',
+    description: 'Explore breathtaking mountain trails, Nine Arch Bridge, and scenic lookouts with an expert local driver.',
+    image: '/Ella.webp',
+  },
+  {
+    slug: 'mirissa-sunset-escape',
+    name: 'Mirissa Sunset Escape',
+    eyebrow: '/ Top Tours',
+    duration: '4 Days / 3 Nights',
+    description: 'Visit iconic coastal landmarks, whale watching spots, and golden beaches with an expert guide.',
+    image: '/Mirissa.webp',
+  },
+  {
+    slug: 'kandy-cultural-journey',
+    name: 'Kandy Cultural Journey',
+    eyebrow: '/ Top Tours',
+    duration: '6 Days / 5 Nights',
+    description: 'Discover historic temples of the tooth, botanical gardens, and traditional tea plantations on a relaxed cultural tour.',
+    image: '/kandy.webp',
+  },
+  {
+    slug: 'galle-heritage-expedition',
+    name: 'Galle Heritage Expedition',
+    eyebrow: '/ Top Tours',
+    duration: '4 Days / 3 Nights',
+    description: 'Stroll along historic fort walls and golden ocean bays with flexible stops throughout the southern coast.',
+    image: '/Galle.webp',
+  },
+]
+
+const prevIndex = computed(() => (currentSlide.value - 1 + topTours.length) % topTours.length)
+const nextIndex = computed(() => (currentSlide.value + 1) % topTours.length)
+
+const prevTour = computed(() => (topTours[prevIndex.value] ?? topTours[0]) as Tour)
+const currentTour = computed(() => (topTours[currentSlide.value] ?? topTours[0]) as Tour)
+const nextTour = computed(() => (topTours[nextIndex.value] ?? topTours[0]) as Tour)
+
 function showPrev() {
-  currentSlide.value =
-    (currentSlide.value - 1 + destinations.length) % destinations.length
+  currentSlide.value = prevIndex.value
 }
 
 function showNext() {
-  currentSlide.value = (currentSlide.value + 1) % destinations.length
+  currentSlide.value = nextIndex.value
 }
 
 function startAutoSlide() {
   stopAutoSlide()
   autoSlideInterval = setInterval(() => {
     showNext()
-  }, 5000)
+  }, 6000)
 }
 
 function stopAutoSlide() {
@@ -58,7 +108,6 @@ onBeforeUnmount(() => {
   <section
     class="relative isolate mx-0 my-5 min-h-[85svh] overflow-hidden rounded-3xl md:mx-3 xl:mx-4"
   >
-    <!-- Background slides -->
     <div class="absolute inset-0 z-0 h-full w-full">
       <img
         v-for="(slide, index) in destinations"
@@ -73,7 +122,6 @@ onBeforeUnmount(() => {
       />
     </div>
 
-    <!-- Dark gradient overlay for readability -->
     <div
       class="
         absolute inset-0 z-10
@@ -81,7 +129,6 @@ onBeforeUnmount(() => {
       "
     ></div>
 
-    <!-- Previous button (Left Center) -->
     <button
       type="button"
       aria-label="Previous destination"
@@ -90,7 +137,6 @@ onBeforeUnmount(() => {
         cursor-pointer items-center justify-center rounded-full border
         border-white bg-white text-black transition-colors
         hover:border-[#f97316] hover:bg-[#f97316] hover:text-white
-        active:border-[#f97316] active:bg-[#f97316] active:text-white
         md:left-8 md:size-14
         lg:left-12
       "
@@ -103,17 +149,11 @@ onBeforeUnmount(() => {
         viewBox="0 0 24 24"
         stroke="currentColor"
         stroke-width="2"
-        aria-hidden="true"
       >
-        <path
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          d="M15 19l-7-7 7-7"
-        />
+        <path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7" />
       </svg>
     </button>
 
-    <!-- Next button (Right Center) -->
     <button
       type="button"
       aria-label="Next destination"
@@ -122,7 +162,6 @@ onBeforeUnmount(() => {
         cursor-pointer items-center justify-center rounded-full border
         border-white bg-white text-black transition-colors
         hover:border-[#f97316] hover:bg-[#f97316] hover:text-white
-        active:border-[#f97316] active:bg-[#f97316] active:text-white
         md:right-8 md:size-14
         lg:right-12
       "
@@ -135,17 +174,11 @@ onBeforeUnmount(() => {
         viewBox="0 0 24 24"
         stroke="currentColor"
         stroke-width="2"
-        aria-hidden="true"
       >
-        <path
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          d="M9 5l7 7-7 7"
-        />
+        <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
       </svg>
     </button>
 
-    <!-- Eyebrow and Destination placed center bottom -->
     <div
       class="
         relative z-20 mx-auto flex min-h-[85svh] max-w-7xl items-end
@@ -166,7 +199,7 @@ onBeforeUnmount(() => {
     </div>
   </section>
 
-  <!-- Destination Cards -->
+  <!-- Destination Cards Grid -->
   <section class="bg-[#f8f7f3] px-5 py-16 text-[#20231f] lg:px-8 lg:py-24">
     <div class="mx-auto max-w-7xl">
       <p class="text-xs font-semibold uppercase tracking-[0.2em] text-[#f97316]">
@@ -190,7 +223,6 @@ onBeforeUnmount(() => {
             hover:-translate-y-1 hover:shadow-xl
           "
         >
-          <!-- Background image -->
           <img
             :src="publicAsset(place.image)"
             :alt="place.name"
@@ -202,7 +234,6 @@ onBeforeUnmount(() => {
             "
           />
 
-          <!-- Bottom gradient overlay -->
           <div
             class="
               absolute inset-0 -z-10
@@ -210,7 +241,6 @@ onBeforeUnmount(() => {
             "
           ></div>
 
-          <!-- Bottom content: Title + Caption on left, Right-aligned upward-tilted arrow button on right -->
           <div class="absolute inset-x-0 bottom-0 flex items-end justify-between gap-4 p-6 sm:p-7">
             <div class="min-w-0 text-white">
               <h3 class="text-2xl font-bold tracking-tight sm:text-3xl">
@@ -221,7 +251,6 @@ onBeforeUnmount(() => {
               </p>
             </div>
 
-            <!-- Right-aligned circular button with upward-tilted arrow -->
             <span
               class="
                 flex size-11 shrink-0 items-center justify-center rounded-full
@@ -249,6 +278,155 @@ onBeforeUnmount(() => {
             </span>
           </div>
         </NuxtLink>
+      </div>
+    </div>
+  </section>
+
+  <!-- Top Tours Carousel Section -->
+  <section class="bg-white px-5 py-16 text-[#20231f] lg:px-8 lg:py-24">
+    <div class="mx-auto max-w-7xl">
+      <!-- Section Header -->
+      <div class="grid gap-8 lg:grid-cols-12 lg:items-end">
+        <div class="lg:col-span-5">
+          <p class="text-xs font-semibold uppercase tracking-[0.2em] text-[#6b6d68]">
+            / Top Tours
+          </p>
+        </div>
+        <div class="lg:col-span-7">
+          <h2 class="text-3xl font-bold tracking-tight text-[#20231f] md:text-5xl">
+            Top tours to spark your wanderlust
+          </h2>
+          <p class="mt-4 text-sm leading-6 text-[#6b6d68] md:text-base">
+            Explore our curated selection of must-visit destinations, complete with detailed itineraries, and unforgettable experiences. Your next adventure starts here!
+          </p>
+        </div>
+      </div>
+
+      <!-- Progress Line & Counter Bar -->
+      <div class="mt-10 flex items-center justify-between border-b border-[#eceae4] pb-6">
+        <div class="flex items-center gap-4">
+          <div class="h-0.5 w-32 bg-[#20231f] relative overflow-hidden">
+            <div
+              class="absolute inset-y-0 left-0 bg-[#f97316] transition-all duration-300"
+              :style="{ width: `${((currentSlide + 1) / topTours.length) * 100}%` }"
+            ></div>
+          </div>
+        </div>
+
+        <div class="flex items-center gap-4">
+          <span class="text-xs font-semibold tracking-wider text-[#6b6d68]">
+            0{{ currentSlide + 1 }} / 0{{ topTours.length }}
+          </span>
+        </div>
+      </div>
+
+      <!-- 3-Card Carousel Layout (Middle Highlighted & Larger) -->
+      <div class="mt-10 grid gap-6 md:grid-cols-3 items-center">
+        <!-- Card 1: Previous Tour Preview -->
+        <div class="group relative overflow-hidden rounded-3xl bg-[#f8f7f3] p-6 border border-[#eceae4] transition-all duration-300 opacity-80 hover:opacity-100">
+          <div class="relative h-60 overflow-hidden rounded-2xl">
+            <img
+              :src="publicAsset(prevTour.image)"
+              :alt="prevTour.name"
+              loading="lazy"
+              class="h-full w-full object-cover transition duration-500 group-hover:scale-105"
+            />
+          </div>
+          <h3 class="mt-5 text-xl font-bold tracking-tight text-[#20231f]">
+            {{ prevTour.name }}
+          </h3>
+        </div>
+
+        <!-- Card 2: Active Highlighted Tour (Center & Expanded) -->
+        <div class="group relative overflow-hidden rounded-3xl bg-[#f8f7f3] p-6 border border-[#eceae4] shadow-xl ring-1 ring-[#f97316]/20 transition-all duration-300 scale-105 z-10">
+          <div class="relative h-64 overflow-hidden rounded-2xl">
+            <img
+              :src="publicAsset(currentTour.image)"
+              :alt="currentTour.name"
+              loading="lazy"
+              class="h-full w-full object-cover transition duration-500 group-hover:scale-105"
+            />
+          </div>
+
+          <div class="mt-5 flex items-start justify-between gap-4">
+            <h3 class="text-xl font-bold tracking-tight text-[#20231f]">
+              {{ currentTour.name }}
+            </h3>
+            <span class="text-xs font-semibold text-[#6b6d68] shrink-0">
+              {{ currentTour.duration }}
+            </span>
+          </div>
+
+          <p class="mt-2 text-sm leading-6 text-[#6b6d68]">
+            {{ currentTour.description }}
+          </p>
+
+          <div class="mt-6 flex items-center justify-between pt-4 border-t border-[#eceae4]">
+            <span class="text-xs font-semibold uppercase tracking-wider text-[#6b6d68]">
+              Private Journey
+            </span>
+            <NuxtLink
+              to="/booking"
+              class="inline-flex items-center justify-center rounded-full bg-[#19191b] px-5 py-3 text-xs font-semibold text-white transition-colors hover:bg-[#f97316] hover:text-black"
+            >
+              Booking Now
+            </NuxtLink>
+          </div>
+        </div>
+
+        <!-- Card 3: Next Tour Preview -->
+        <div class="group relative overflow-hidden rounded-3xl bg-[#f8f7f3] p-6 border border-[#eceae4] transition-all duration-300 opacity-80 hover:opacity-100">
+          <div class="relative h-60 overflow-hidden rounded-2xl">
+            <img
+              :src="publicAsset(nextTour.image)"
+              :alt="nextTour.name"
+              loading="lazy"
+              class="h-full w-full object-cover transition duration-500 group-hover:scale-105"
+            />
+          </div>
+          <h3 class="mt-5 text-xl font-bold tracking-tight text-[#20231f]">
+            {{ nextTour.name }}
+          </h3>
+        </div>
+      </div>
+
+      <!-- Carousel Direction Arrows Below Cards (Centered) -->
+      <div class="mt-12 flex items-center justify-center gap-4">
+        <button
+          type="button"
+          aria-label="Previous tour"
+          class="flex size-12 cursor-pointer items-center justify-center rounded-full border border-[#20231f] bg-white text-[#20231f] transition-colors hover:border-[#f97316] hover:bg-[#f97316] hover:text-white focus:outline-none focus:ring-2 focus:ring-[#f97316]"
+          @click="prevSlide"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            class="size-5"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+            stroke-width="2"
+          >
+            <path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7" />
+          </svg>
+        </button>
+
+        <button
+          type="button"
+          aria-label="Next tour"
+          class="flex size-12 cursor-pointer items-center justify-center rounded-full border border-[#20231f] bg-[#20231f] text-white transition-colors hover:border-[#f97316] hover:bg-[#f97316] hover:text-black focus:outline-none focus:ring-2 focus:ring-[#f97316]"
+          @click="nextSlide"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            class="size-5"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+            stroke-width="2"
+          >
+            <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
+          </svg>
+        </button>
       </div>
     </div>
   </section>
