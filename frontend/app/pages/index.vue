@@ -287,8 +287,8 @@ function publicAsset(path: string) {
         </article>
       </div>
 
-      <!-- Bottom Right Corner Back and Front Navigation Arrows -->
-      <div class="mt-10 flex items-center justify-end gap-3">
+      <!-- Bottom Right Corner Back and Front Navigation Arrows (Hidden on mobile screens, visible on md and up) -->
+      <div class="mt-10 hidden md:flex items-center justify-end gap-3">
         <button
           type="button"
           aria-label="Previous vehicle"
