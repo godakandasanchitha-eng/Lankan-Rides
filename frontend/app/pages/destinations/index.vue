@@ -15,7 +15,6 @@ interface Tour {
   slug: string
   name: string
   eyebrow: string
-  duration: string
   description: string
   image: string
 }
@@ -25,7 +24,6 @@ const topTours: Tour[] = [
     slug: 'ella-mountain-escape',
     name: 'Ella Mountain Escape',
     eyebrow: '/ Top Tours',
-    duration: '5 Days / 4 Nights',
     description: 'Explore breathtaking mountain trails, Nine Arch Bridge, and scenic lookouts with an expert local driver.',
     image: '/Ella.webp',
   },
@@ -33,7 +31,6 @@ const topTours: Tour[] = [
     slug: 'mirissa-sunset-escape',
     name: 'Mirissa Sunset Escape',
     eyebrow: '/ Top Tours',
-    duration: '4 Days / 3 Nights',
     description: 'Visit iconic coastal landmarks, whale watching spots, and golden beaches with an expert guide.',
     image: '/Mirissa.webp',
   },
@@ -41,7 +38,6 @@ const topTours: Tour[] = [
     slug: 'kandy-cultural-journey',
     name: 'Kandy Cultural Journey',
     eyebrow: '/ Top Tours',
-    duration: '6 Days / 5 Nights',
     description: 'Discover historic temples of the tooth, botanical gardens, and traditional tea plantations on a relaxed cultural tour.',
     image: '/kandy.webp',
   },
@@ -49,9 +45,22 @@ const topTours: Tour[] = [
     slug: 'galle-heritage-expedition',
     name: 'Galle Heritage Expedition',
     eyebrow: '/ Top Tours',
-    duration: '4 Days / 3 Nights',
     description: 'Stroll along historic fort walls and golden ocean bays with flexible stops throughout the southern coast.',
     image: '/Galle.webp',
+  },
+  {
+    slug: 'sigiriya-ancient-wonder',
+    name: 'Sigiriya Ancient Wonder',
+    eyebrow: '/ Top Tours',
+    description: 'Scale the legendary rock fortress, tour ancient water gardens, and experience cultural heritage up close.',
+    image: '/Sigiriya.webp',
+  },
+  {
+    slug: 'nuwara-eliya-highlands',
+    name: 'Nuwara Eliya Highlands',
+    eyebrow: '/ Top Tours',
+    description: 'Breathe in crisp mountain air, stroll through emerald tea estates, and enjoy colonial-era charm.',
+    image: '/Nuwara-eliya.webp',
   },
 ]
 
@@ -101,6 +110,17 @@ onMounted(() => {
 onBeforeUnmount(() => {
   stopAutoSlide()
 })
+
+// Show More / Show Less Destinations Toggle Logic
+const showAllDestinations = ref(false)
+
+const displayedDestinations = computed(() => {
+  return showAllDestinations.value ? destinations : destinations.slice(0, 6)
+})
+
+function toggleShowMore() {
+  showAllDestinations.value = !showAllDestinations.value
+}
 </script>
 
 <template>
@@ -199,7 +219,7 @@ onBeforeUnmount(() => {
     </div>
   </section>
 
-  <!-- Destination Cards Grid -->
+  <!-- Destination Cards Grid (With Show More / Show Less Button in Bottom Center) -->
   <section class="bg-[#f8f7f3] px-5 py-16 text-[#20231f] lg:px-8 lg:py-24">
     <div class="mx-auto max-w-7xl">
       <p class="text-xs font-semibold uppercase tracking-[0.2em] text-[#f97316]">
@@ -214,7 +234,7 @@ onBeforeUnmount(() => {
 
       <div class="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
         <NuxtLink
-          v-for="place in destinations"
+          v-for="place in displayedDestinations"
           :key="place.slug"
           :to="`/destinations/${place.slug}`"
           class="
@@ -278,6 +298,23 @@ onBeforeUnmount(() => {
             </span>
           </div>
         </NuxtLink>
+      </div>
+
+      <!-- Show More / Show Less Button in Bottom Center -->
+      <div class="mt-12 text-center">
+        <button
+          type="button"
+          class="
+            inline-flex cursor-pointer items-center justify-center rounded-full
+            bg-[#141416] px-8 py-4 text-sm font-semibold text-white
+            transition-colors duration-200
+            hover:bg-[#f97316] hover:text-black
+          "
+          @click="toggleShowMore"
+        >
+          {{ showAllDestinations ? 'Show Less' : 'Show More Destinations' }}
+          <span class="ml-2" aria-hidden="true">{{ showAllDestinations ? '↑' : '↓' }}</span>
+        </button>
       </div>
     </div>
   </section>
@@ -348,13 +385,10 @@ onBeforeUnmount(() => {
             />
           </div>
 
-          <div class="mt-5 flex items-start justify-between gap-4">
+          <div class="mt-5">
             <h3 class="text-xl font-bold tracking-tight text-[#20231f]">
               {{ currentTour.name }}
             </h3>
-            <span class="text-xs font-semibold text-[#6b6d68] shrink-0">
-              {{ currentTour.duration }}
-            </span>
           </div>
 
           <p class="mt-2 text-sm leading-6 text-[#6b6d68]">

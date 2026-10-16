@@ -297,7 +297,7 @@ function publicAsset(path: string) {
     </div>
   </section>
 
-  <!-- 4-Card Row Destination Showcase with Bottom-Right Side Navigation Arrows -->
+  <!-- Popular Routes & Stops Section -->
   <section class="bg-[#efede6] px-6 py-16 text-[#20231f] md:px-10 md:py-24">
     <div class="mx-auto max-w-7xl">
       <!-- Section Header with Different Caption -->
@@ -347,7 +347,7 @@ function publicAsset(path: string) {
               </p>
             </div>
 
-            <!-- Circular Arrow Icon on Card (Fixed: normal state is translucent white, turns orange on hover) -->
+            <!-- Circular Arrow Icon on Card -->
             <span
               class="flex size-10 shrink-0 items-center justify-center rounded-full border border-white/25 bg-white/15 text-white backdrop-blur-sm transition-colors duration-300 group-hover:border-[#f97316] group-hover:bg-[#f97316]"
               aria-hidden="true"
@@ -370,47 +370,61 @@ function publicAsset(path: string) {
         </NuxtLink>
       </div>
 
-      <!-- Bottom Right Navigation Arrows Below the 4th Card -->
-      <div class="mt-6 flex justify-end gap-3">
-        <button
-          type="button"
-          @click="scrollCarousel('left')"
-          class="flex size-12 items-center justify-center rounded-full border-2 border-white bg-transparent text-[#20231f] shadow-sm ring-1 ring-black/10 transition-all duration-300 hover:border-[#f97316] hover:bg-[#f97316] hover:text-white hover:ring-[#f97316] focus:outline-none focus:ring-2 focus:ring-[#f97316]"
-          aria-label="Previous destinations"
-        >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            class="size-5"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="2.5"
-            stroke-linecap="round"
-            stroke-linejoin="round"
+      <!-- Bottom Right Navigation Arrows & "View all destinations" Button -->
+      <div class="mt-8 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+        <!-- Direct button to destinations page -->
+        <div>
+          <NuxtLink
+            to="/destinations"
+            class="inline-flex items-center justify-center rounded-full bg-[#f97316] px-6 py-3.5 text-sm font-semibold text-black transition-colors hover:bg-[#ea580c] hover:text-white focus:outline-none focus:ring-2 focus:ring-[#f97316] focus:ring-offset-2"
           >
-            <path d="m15 18-6-6 6-6" />
-          </svg>
-        </button>
+            View all destinations
+            <span class="ml-2" aria-hidden="true">→</span>
+          </NuxtLink>
+        </div>
 
-        <button
-          type="button"
-          @click="scrollCarousel('right')"
-          class="flex size-12 items-center justify-center rounded-full border-2 border-white bg-transparent text-[#20231f] shadow-sm ring-1 ring-black/10 transition-all duration-300 hover:border-[#f97316] hover:bg-[#f97316] hover:text-white hover:ring-[#f97316] focus:outline-none focus:ring-2 focus:ring-[#f97316]"
-          aria-label="Slide to next destinations"
-        >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            class="size-5"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="2.5"
-            stroke-linecap="round"
-            stroke-linejoin="round"
+        <!-- Scroll Arrows -->
+        <div class="flex justify-end gap-3">
+          <button
+            type="button"
+            @click="scrollCarousel('left')"
+            class="flex size-12 items-center justify-center rounded-full border-2 border-white bg-transparent text-[#20231f] shadow-sm ring-1 ring-black/10 transition-all duration-300 hover:border-[#f97316] hover:bg-[#f97316] hover:text-white hover:ring-[#f97316] focus:outline-none focus:ring-2 focus:ring-[#f97316]"
+            aria-label="Previous destinations"
           >
-            <path d="m9 18 6-6-6-6" />
-          </svg>
-        </button>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              class="size-5"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2.5"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <path d="m15 18-6-6 6-6" />
+            </svg>
+          </button>
+
+          <button
+            type="button"
+            @click="scrollCarousel('right')"
+            class="flex size-12 items-center justify-center rounded-full border-2 border-white bg-transparent text-[#20231f] shadow-sm ring-1 ring-black/10 transition-all duration-300 hover:border-[#f97316] hover:bg-[#f97316] hover:text-white hover:ring-[#f97316] focus:outline-none focus:ring-2 focus:ring-[#f97316]"
+            aria-label="Slide to next destinations"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              class="size-5"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2.5"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <path d="m9 18 6-6-6-6" />
+            </svg>
+          </button>
+        </div>
       </div>
     </div>
   </section>
@@ -430,20 +444,20 @@ function publicAsset(path: string) {
 
       <!-- 3-Column Bento Grid: 2 Stacked Images | Center Dark Card | 2 Stacked Images -->
       <div class="mt-12 grid gap-6 lg:grid-cols-3 lg:items-stretch">
-        <!-- Left Column: Two Stacked Images -->
+        <!-- Left Column: Two Stacked Images (Services-1 & Services-2) -->
         <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-1 lg:grid-rows-2">
           <div class="overflow-hidden rounded-3xl">
             <img
-              :src="publicAsset('/Ella.webp')"
-              alt="Scenic hill country in Ella"
+              :src="publicAsset('/Services-1.webp')"
+              alt="Sri Lanka private transfer service"
               loading="lazy"
               class="h-60 w-full object-cover transition duration-500 hover:scale-105 lg:h-full"
             />
           </div>
           <div class="overflow-hidden rounded-3xl">
             <img
-              :src="publicAsset('/kandy.webp')"
-              alt="Cultural lakeside views in Kandy"
+              :src="publicAsset('/Services-2.webp')"
+              alt="Professional local tour driver"
               loading="lazy"
               class="h-60 w-full object-cover transition duration-500 hover:scale-105 lg:h-full"
             />
@@ -501,20 +515,20 @@ function publicAsset(path: string) {
           </NuxtLink>
         </div>
 
-        <!-- Right Column: Two Stacked Images -->
+        <!-- Right Column: Two Stacked Images (Services-3 & Services-4) -->
         <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-1 lg:grid-rows-2">
           <div class="overflow-hidden rounded-3xl">
             <img
-              :src="publicAsset('/Galle.webp')"
-              alt="Historic coastal fort in Galle"
+              :src="publicAsset('/Services-3.webp')"
+              alt="Cultural heritage sightseeing tour"
               loading="lazy"
               class="h-60 w-full object-cover transition duration-500 hover:scale-105 lg:h-full"
             />
           </div>
           <div class="overflow-hidden rounded-3xl">
             <img
-              :src="publicAsset('/Mirissa.webp')"
-              alt="Sunny beaches in Mirissa"
+              :src="publicAsset('/Services-4.webp')"
+              alt="Wildlife safari park excursion"
               loading="lazy"
               class="h-60 w-full object-cover transition duration-500 hover:scale-105 lg:h-full"
             />

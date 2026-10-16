@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { onMounted, onBeforeUnmount, ref } from 'vue'
+import { onBeforeUnmount, onMounted, ref } from 'vue'
 
 const isScrollingUp = ref(false)
 const route = useRoute()
@@ -25,13 +25,92 @@ function navLinkClass(path: string) {
     : 'text-white/85 hover:bg-[#f97316] hover:text-black'
 }
 
+// Auto-scrolling CTA cards (Car rental & Destination routes)
+interface CtaRideCard {
+  title: string
+  subtitle: string
+  tag: string
+  image: string
+}
+
+const ctaCards: CtaRideCard[] = [
+  {
+    title: 'Colombo  →  Ella',
+    subtitle: 'SUV (Prado) · Private Driver',
+    tag: 'Hill Country',
+    image: '/Ella.webp',
+  },
+  {
+    title: 'Airport (CMB)  →  Galle',
+    subtitle: 'Comfort Sedan · Southern Coast',
+    tag: '2.5 Hrs',
+    image: '/Galle.webp',
+  },
+  {
+    title: 'Kandy  →  Nuwara Eliya',
+    subtitle: 'Saloon · Tea Country Route',
+    tag: 'Scenic Drive',
+    image: '/kandy.webp',
+  },
+  {
+    title: 'Galle  →  Mirissa & Yala',
+    subtitle: 'High-Roof Van (KDH) · Group Tour',
+    tag: 'Coast & Safari',
+    image: '/Mirissa.webp',
+  },
+  {
+    title: 'Ella  →  Arugam Bay',
+    subtitle: 'SUV · East Coast Transfer',
+    tag: 'Beach Hop',
+    image: '/Arugambay.webp',
+  },
+]
+
+const activeCtaIndex = ref(0)
+let ctaInterval: ReturnType<typeof setInterval> | null = null
+
+function getCardPosition(index: number) {
+  const total = ctaCards.length
+  const diff = (index - activeCtaIndex.value + total) % total
+
+  if (diff === 0) return 'center'
+  if (diff === total - 1) return 'top'
+  if (diff === 1) return 'bottom'
+  if (diff === total - 2) return 'exit-top'
+  return 'enter-bottom'
+}
+
+function getCardClasses(index: number) {
+  const pos = getCardPosition(index)
+
+  switch (pos) {
+    case 'top':
+      return 'z-10 -translate-y-[84px] scale-[0.94] border-[#eceae4]/80 bg-white/65 py-4 opacity-60 backdrop-blur-xs shadow-none'
+    case 'center':
+      return 'z-20 translate-y-0 scale-105 border-[#e2e0d8] bg-white py-5 opacity-100 shadow-xl'
+    case 'bottom':
+      return 'z-10 translate-y-[84px] scale-[0.94] border-[#eceae4]/80 bg-white/65 py-4 opacity-60 backdrop-blur-xs shadow-none'
+    case 'exit-top':
+      return 'pointer-events-none z-0 -translate-y-[145px] scale-90 border-transparent bg-white/40 py-4 opacity-0'
+    default:
+      return 'pointer-events-none z-0 translate-y-[145px] scale-90 border-transparent bg-white/40 py-4 opacity-0'
+  }
+}
+
 onMounted(() => {
   previousScrollY = window.scrollY
   window.addEventListener('scroll', handleScroll, { passive: true })
+
+  ctaInterval = setInterval(() => {
+    activeCtaIndex.value = (activeCtaIndex.value + 1) % ctaCards.length
+  }, 3000)
 })
 
 onBeforeUnmount(() => {
   window.removeEventListener('scroll', handleScroll)
+  if (ctaInterval !== null) {
+    clearInterval(ctaInterval)
+  }
 })
 </script>
 
@@ -108,117 +187,297 @@ onBeforeUnmount(() => {
     <main>
       <slot />
 
-      <!-- Car rental CTA -->
-      <section class="overflow-visible bg-[#eaf1ff] px-5 py-16 md:px-8">
+      <!-- Auto-Scrolling Stacked Card CTA Section -->
+      <section class="bg-white px-5 py-12 md:px-8 md:py-16">
         <div
-          class="relative mx-auto mt-28 min-h-[300px] max-w-6xl rounded-3xl bg-[#242124] px-6 pb-8 pt-24 text-white md:mt-0 md:flex md:min-h-[3px] md:items-center md:px-10 md:py-10"
+          class="
+            relative isolate mx-auto max-w-7xl overflow-hidden rounded-[36px]
+            border border-[#eceae4] bg-[#f7f7f5] px-6 py-14 text-[#20231f]
+            shadow-sm
+            md:px-14 md:py-20
+          "
         >
-          <!-- Larger SUV overlaps the top and left edges of the banner -->
-          <img
-            :src="publicAsset('/SUV-CTA.png')"
-            alt="SUV packed and ready for a Sri Lankan road trip"
-            class="absolute left-1/2 top-0 z-10 h-64 w-80 -translate-x-1/2 -translate-y-1/2 object-contain md:left-[-150px] md:top-1/2 md:h-[500px] md:w-[620px] md:translate-x-0 md:-translate-y-[55%]"
-          />
+          <!-- Subtle right-side atmospheric background image & soft fade -->
+          <div class="pointer-events-none absolute inset-y-0 right-0 -z-10 w-full lg:w-3/5">
+            <img
+              :src="publicAsset('/Ella.webp')"
+              alt=""
+              class="size-full object-cover object-center opacity-15"
+            />
+            <div
+              class="
+                absolute inset-0
+                bg-gradient-to-r from-[#f7f7f5] via-[#f7f7f5]/90 to-[#f7f7f5]/60
+              "
+            ></div>
+            <div
+              class="
+                absolute inset-0
+                bg-gradient-to-t from-[#f7f7f5] via-transparent to-[#f7f7f5]
+              "
+            ></div>
+          </div>
 
-          <div class="relative z-20 text-center md:ml-[430px] md:flex-1 md:text-left">
-            <p class="text-xs font-semibold uppercase tracking-[0.18em] text-white/80">
-              Your island journey starts here
-            </p>
+          <div class="grid items-center gap-12 lg:grid-cols-12">
+            <!-- Left Column: Heading, Subtitle & Two Pill Buttons -->
+            <div class="lg:col-span-6">
+              <h2
+                class="
+                  text-3xl font-semibold tracking-tight text-[#141416]
+                  sm:text-4xl
+                  md:text-[44px] md:leading-[1.15]
+                "
+              >
+                Planning a journey across Sri Lanka with Lankan Rides?
+              </h2>
 
-            <h2 class="mt-2 text-2xl font-semibold leading-tight sm:text-3xl">
-              Ready to explore Sri Lanka?
-            </h2>
+              <p class="mt-4 max-w-md text-sm leading-6 text-[#6b6d68] sm:text-base">
+                Lankan Rides pairs comfortable private vehicles with trusted local drivers for airport transfers and custom island tours.
+              </p>
 
-            <p class="mt-3 text-sm leading-6 text-white/85 sm:text-base">
-              Find a comfortable ride for your next airport pickup, scenic drive,
-              or island adventure.
-            </p>
+              <div class="mt-8 flex flex-wrap items-center gap-3">
+                <NuxtLink
+                  to="/booking"
+                  class="
+                    inline-flex items-center justify-center rounded-full
+                    bg-[#141416] px-6 py-3.5 text-xs font-semibold text-white
+                    transition-colors
+                    hover:bg-[#f97316] hover:text-black
+                    sm:text-sm
+                  "
+                >
+                  Book a ride
+                </NuxtLink>
 
-            <NuxtLink
-              to="/booking"
-              class="mt-5 inline-flex items-center justify-center rounded-full bg-white px-6 py-3 text-sm font-semibold text-[#20231f] transition-colors hover:bg-[#f97316] focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-[#242124]"
-            >
-              Book Now
-              <span class="ml-2" aria-hidden="true">→</span>
-            </NuxtLink>
+                <NuxtLink
+                  to="/destinations"
+                  class="
+                    group inline-flex items-center justify-center gap-2.5
+                    rounded-full border border-[#d8d7d2] bg-white/80 px-6 py-3.5
+                    text-xs font-semibold text-[#20231f] transition-colors
+                    hover:border-[#f97316] hover:bg-[#f97316] hover:text-black
+                    sm:text-sm
+                  "
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    class="size-4 text-[#555852] transition-transform duration-200 group-hover:translate-x-0.5 group-hover:text-black"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    aria-hidden="true"
+                  >
+                    <path d="M6 5v6a3 3 0 0 0 3 3h10" />
+                    <path d="m15 10 4 4-4 4" />
+                  </svg>
+                  <span>Explore destinations</span>
+                </NuxtLink>
+              </div>
+            </div>
+
+            <!-- Right Column: Smooth Auto-Scrolling 3-Card Stack + Connector & Bottom Pill -->
+            <div class="flex flex-col items-center lg:col-span-6">
+              <div class="relative flex h-[256px] w-full max-w-md items-center justify-center overflow-hidden px-3">
+                <div
+                  v-for="(card, index) in ctaCards"
+                  :key="card.title"
+                  class="
+                    
+                    absolute inset-x-3 flex items-center justify-between gap-4
+                    rounded-2xl border px-5
+                    transition-all duration-700
+                    ease-[cubic-bezier(0.22,1,0.36,1)]
+                  "
+                  :class="getCardClasses(index)"
+                >
+                  <div class="flex min-w-0 items-center gap-3.5">
+                    <img
+                      :src="publicAsset(card.image)"
+                      :alt="card.title"
+                      class="
+                        shrink-0 rounded-full object-cover ring-2
+                        ring-[#f97316]/20 transition-all duration-700
+                      "
+                      :class="getCardPosition(index) === 'center' ? 'size-12' : 'size-10'"
+                    />
+
+                    <div class="min-w-0">
+                      <p
+                        class="truncate font-semibold text-[#141416] transition-all duration-700"
+                        :class="getCardPosition(index) === 'center' ? 'text-base' : 'text-sm'"
+                      >
+                        {{ card.title }}
+                      </p>
+                      <p class="truncate text-xs text-[#6b6d68]">
+                        {{ card.subtitle }}
+                      </p>
+                    </div>
+                  </div>
+
+                  <span
+                    class="shrink-0 font-bold tracking-tight transition-all duration-700"
+                    :class="
+                      getCardPosition(index) === 'center'
+                        ? 'text-base text-[#141416] sm:text-lg'
+                        : 'text-sm text-[#6b6d68]'
+                    "
+                  >
+                    {{ card.tag }}
+                  </span>
+                </div>
+              </div>
+
+              <!-- Connector Lines, Orange Car Icon Circle & Bottom Pill Badge -->
+              <div class="flex flex-col items-center">
+                <!-- Top horizontal bracket line + vertical stem -->
+                <div class="h-3 w-44 rounded-b-lg border-x border-b border-[#d5d4ce]"></div>
+                <div class="h-3 w-px bg-[#d5d4ce]"></div>
+
+                <!-- Circular Orange Icon Badge -->
+                <div
+                  class="
+                    flex size-8 items-center justify-center rounded-full
+                    bg-[#f97316] text-black shadow-sm ring-4 ring-[#f97316]/15
+                  "
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    class="size-4"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    aria-hidden="true"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      d="M3 13.5 4.5 8h15l1.5 5.5v5h-3v-2H6v2H3v-5Z"
+                    />
+                  </svg>
+                </div>
+
+                <div class="h-2.5 w-px bg-[#d5d4ce]"></div>
+
+                <!-- Bottom Dark Pill -->
+                <NuxtLink
+                  to="/booking"
+                  class="
+                    rounded-full bg-[#141416] px-5 py-2 text-xs font-semibold
+                    text-white shadow-md transition-colors
+                    hover:bg-[#f97316] hover:text-black
+                  "
+                >
+                  Private Island Rides
+                </NuxtLink>
+              </div>
+            </div>
           </div>
         </div>
       </section>
     </main>
 
     <!-- Footer -->
-    <footer class="bg-black px-6 text-white">
-      <div class="mx-auto grid max-w-7xl gap-10 py-12 sm:grid-cols-2 lg:grid-cols-4">
-        <!-- Brand -->
-        <div>
-          <NuxtLink
-            to="/"
-            class="inline-flex items-center gap-3"
-            aria-label="Lankan Rides home"
-          >
-            <span class="flex size-12 items-center justify-center overflow-hidden rounded-full bg-white">
-              <img
-                :src="publicAsset('/lankan-rides-logo.png')"
-                alt="Lankan Rides"
-                class="size-full object-contain"
-              />
-            </span>
-            <span class="text-lg font-semibold">Lankan Rides</span>
-          </NuxtLink>
+    <footer class="bg-black px-6 pt-16 pb-8 text-white">
+      <div class="mx-auto grid max-w-7xl gap-12 lg:grid-cols-12 lg:items-start">
+        <!-- Left & Middle: Navigation Links -->
+        <div class="grid grid-cols-2 gap-8 sm:grid-cols-2 lg:col-span-8">
+          <ul class="space-y-4 text-xs font-semibold tracking-wider text-white">
+            <li><NuxtLink to="/" class="hover:text-[#f97316]">HOME</NuxtLink></li>
+            <li><NuxtLink to="/fleet" class="hover:text-[#f97316]">OUR FLEET</NuxtLink></li>
+            <li><NuxtLink to="/services" class="hover:text-[#f97316]">SERVICES</NuxtLink></li>
+            <li><NuxtLink to="/destinations" class="hover:text-[#f97316]">DESTINATIONS</NuxtLink></li>
+            <li><NuxtLink to="/booking" class="hover:text-[#f97316]">CONTACT US</NuxtLink></li>
+          </ul>
 
-          <p class="mt-4 max-w-xs text-sm leading-6 text-white/65">
-            Your local ride for discovering Sri Lanka, from airport pickups to
-            scenic island journeys.
+          <ul class="space-y-4 text-xs font-semibold tracking-wider text-white">
+            <li><NuxtLink to="/about" class="hover:text-[#f97316]">PRIVACY POLICY</NuxtLink></li>
+            <li><NuxtLink to="/about" class="hover:text-[#f97316]">TERM AND CONDITION</NuxtLink></li>
+          </ul>
+        </div>
+
+        <!-- Right Column: Newsletter & Social Icons -->
+        <div class="lg:col-span-4">
+          <h3 class="text-sm font-bold tracking-wide text-white">
+            Join Our Newsletter
+          </h3>
+          <p class="mt-2 text-xs text-white/65">
+            Keep up to date with everything Lankan Rides
           </p>
-        </div>
 
-        <!-- Company -->
-        <div>
-          <h2 class="text-sm font-semibold">Company</h2>
-          <ul class="mt-4 space-y-3 text-sm text-white/65">
-            <li><NuxtLink to="/about" class="hover:text-[#f97316]">About Us</NuxtLink></li>
-            <li><NuxtLink to="/services" class="hover:text-[#f97316]">Our Services</NuxtLink></li>
-            <li><NuxtLink to="/fleet" class="hover:text-[#f97316]">Our Fleet</NuxtLink></li>
-          </ul>
-        </div>
+          <div class="mt-4">
+            <input
+              type="email"
+              placeholder="Enter your email"
+              class="
+                w-full rounded-xl border border-white/10 bg-[#161618] px-4 py-3
+                text-xs text-white placeholder-white/40 outline-none
+                focus:border-[#f97316]
+              "
+            />
+          </div>
 
-        <!-- Support -->
-        <div>
-          <h2 class="text-sm font-semibold">Support</h2>
-          <ul class="mt-4 space-y-3 text-sm text-white/65">
-            <li><NuxtLink to="/booking" class="hover:text-[#f97316]">Contact Us</NuxtLink></li>
-            <li><NuxtLink to="/booking" class="hover:text-[#f97316]">Plan a Ride</NuxtLink></li>
-            <li><NuxtLink to="/destinations" class="hover:text-[#f97316]">Travel Information</NuxtLink></li>
-          </ul>
-        </div>
+          <!-- Social Icons -->
+          <div class="mt-6 flex items-center gap-3">
+            <a
+              href="https://linkedin.com"
+              target="_blank"
+              rel="noopener"
+              aria-label="LinkedIn"
+              class="
+                flex size-10 items-center justify-center rounded-xl
+                border border-white/10 bg-[#161618] text-white transition
+                hover:border-[#f97316] hover:bg-[#f97316] hover:text-black
+              "
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" class="size-4" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.88 8.56a1.68 1.68 0 0 0 1.68-1.68c0-.93-.75-1.69-1.68-1.69a1.69 1.69 0 0 0-1.69 1.69c0 .93.76 1.68 1.69 1.68m1.39 9.94v-8.37H5.5v8.37h2.77z"/>
+              </svg>
+            </a>
 
-        <!-- Contact details -->
-        <div>
-          <h2 class="text-sm font-semibold">Contact Us</h2>
-          <ul class="mt-4 space-y-3 text-sm text-white/65">
-            <li>
-              <a href="tel:+94112345678" class="hover:text-[#f97316]">
-                +94 11 234 5678
-              </a>
-            </li>
-            <li>
-              <a href="mailto:hello@lankanrides.lk" class="hover:text-[#f97316]">
-                hello@lankanrides.lk
-              </a>
-            </li>
-            <li>Colombo, Sri Lanka</li>
-          </ul>
+            <a
+              href="https://instagram.com"
+              target="_blank"
+              rel="noopener"
+              aria-label="Instagram"
+              class="
+                flex size-10 items-center justify-center rounded-xl
+                border border-white/10 bg-[#161618] text-white transition
+                hover:border-[#f97316] hover:bg-[#f97316] hover:text-black
+              "
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" class="size-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
+                <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/>
+                <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/>
+              </svg>
+            </a>
+
+            <a
+              href="https://facebook.com"
+              target="_blank"
+              rel="noopener"
+              aria-label="Facebook"
+              class="
+                flex size-10 items-center justify-center rounded-xl
+                border border-white/10 bg-[#161618] text-white transition
+                hover:border-[#f97316] hover:bg-[#f97316] hover:text-black
+              "
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" class="size-4" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M12 2a10 10 0 1 0 0 20v-7h-2.5v-3H12V9.5a3.5 3.5 0 0 1 3.5-3.5h2.5v3h-2c-.55 0-1 .45-1 1v2h3l-.5 3h-2.5v7a10 10 0 0 0 2.5-18z"/>
+              </svg>
+            </a>
+          </div>
         </div>
       </div>
 
-      <!-- Copyright and credit -->
-      <div class="border-t border-white/15">
-        <div
-          class="mx-auto flex max-w-7xl flex-col gap-3 py-5 text-sm text-white/65 sm:flex-row sm:items-center sm:justify-between"
-        >
-          <p>Web Design by <span class="font-semibold text-white">IS Studio</span></p>
-          <p class="font-bold text-white">Copyright 2026</p>
-        </div>
+      <!-- Divider & Copyright -->
+      <div class="mx-auto mt-12 max-w-7xl border-t border-white/10 pt-6 text-center text-xs text-white/50">
+        LANKAN RIDES, 2026 ALL RIGHTS RESERVED.
       </div>
     </footer>
   </div>

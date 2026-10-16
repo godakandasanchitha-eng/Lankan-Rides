@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import { ref } from 'vue'
+
 const destinations = [
   {
     name: 'Ella',
@@ -29,48 +31,72 @@ const destinations = [
 
 const vehicles = [
   {
-    name: 'Saloon',
-    subtitle: 'City & Airport Transfer',
-    type: 'Saloon',
-    fuel: 'Petrol',
-    transmission: 'Automatic',
-    capacity: '500km',
-    class: 'Standard',
-    seats: '4 Seats',
-    rating: '4.9',
-    reviews: '100+',
-    image: '/Premio.webp',
-    description: 'A comfortable choice for city trips and airport transfers.',
-  },
-  {
-    name: 'SUV',
-    subtitle: 'Island Explorer',
-    type: 'SUV',
-    fuel: 'Petrol',
-    transmission: 'Automatic',
-    capacity: '600km',
-    class: 'Premium',
-    seats: '5 Seats',
-    rating: '4.8',
-    reviews: '85+',
-    image: '/RAV 4.webp',
-    description: 'Extra room and a higher ride for exploring the island.',
-  },
-  {
     name: 'Sedan',
     subtitle: 'Long Distance Comfort',
     type: 'Sedan',
     fuel: 'Petrol',
     transmission: 'Automatic',
-    capacity: '550km',
     class: 'Comfort',
     seats: '4 Seats',
     rating: '5.0',
     reviews: '120+',
-    image: '/Civic.webp',
-    description: 'A refined, spacious ride for longer journeys.',
+    image: '/Sedan.webp',
+    description: 'A refined, spacious ride for smooth highway journeys and city cruising.',
+  },
+  {
+    name: 'SUV',
+    subtitle: 'Island Explorer (Prado style)',
+    type: 'SUV',
+    fuel: 'Diesel / Petrol',
+    transmission: 'Automatic',
+    class: 'Premium',
+    seats: '7 Seats',
+    rating: '4.9',
+    reviews: '145+',
+    image: '/SUV.webp',
+    description: 'Extra room, robust 4x4 capability, and a high ride for hill country trails.',
+  },
+  {
+    name: 'Hatchback',
+    subtitle: 'City & Coastal Hopper',
+    type: 'Hatchback',
+    fuel: 'Petrol / Hybrid',
+    transmission: 'Automatic',
+    class: 'Economy',
+    seats: '4 Seats',
+    rating: '4.8',
+    reviews: '90+',
+    image: '/Hatchback.webp',
+    description: 'Compact, fuel-efficient, and ideal for navigating narrow colonial streets.',
+  },
+  {
+    name: 'Van',
+    subtitle: 'Group & Family Travel (KDH)',
+    type: 'Van',
+    fuel: 'Diesel',
+    transmission: 'Automatic',
+    class: 'Spacious',
+    seats: '10 Seats',
+    rating: '4.9',
+    reviews: '210+',
+    image: '/Van.webp',
+    description: 'High-roof comfort with ample luggage space for family tours and groups.',
   },
 ]
+
+const currentVehiclePage = ref(0)
+const vehiclesPerPage = 3
+
+const totalVehiclePages = Math.ceil(vehicles.length / vehiclesPerPage)
+
+function prevVehiclePage() {
+  currentVehiclePage.value =
+    (currentVehiclePage.value - 1 + totalVehiclePages) % totalVehiclePages
+}
+
+function nextVehiclePage() {
+  currentVehiclePage.value = (currentVehiclePage.value + 1) % totalVehiclePages
+}
 
 const testimonials = [
   {
@@ -198,56 +224,58 @@ function publicAsset(path: string) {
         <article
           v-for="vehicle in vehicles"
           :key="vehicle.name"
-          class="group overflow-hidden rounded-3xl border border-[#eceae4] bg-white p-6 shadow-sm transition duration-300 hover:-translate-y-1 hover:shadow-xl"
+          class="group overflow-hidden rounded-3xl border border-[#eceae4] bg-white p-6 shadow-sm transition duration-300 hover:-translate-y-1 hover:shadow-xl flex flex-col justify-between"
         >
-          <!-- Top: Name/Subtitle & Rating -->
-          <div class="flex items-start justify-between gap-4">
-            <div>
-              <h3 class="text-xl font-bold text-[#20231f]">
-                {{ vehicle.name }}
-              </h3>
-              <p class="mt-0.5 text-sm text-[#6b6d68]">
-                {{ vehicle.subtitle }}
-              </p>
+          <div>
+            <!-- Top: Name/Subtitle & Rating -->
+            <div class="flex items-start justify-between gap-4">
+              <div>
+                <h3 class="text-xl font-bold text-[#20231f]">
+                  {{ vehicle.name }}
+                </h3>
+                <p class="mt-0.5 text-sm text-[#6b6d68]">
+                  {{ vehicle.subtitle }}
+                </p>
+              </div>
+              <div class="flex items-center gap-1 text-sm font-semibold text-[#20231f]">
+                <span class="text-amber-500">★</span>
+                <span>{{ vehicle.rating }}</span>
+                <span class="text-xs text-[#6b6d68]">({{ vehicle.reviews }})</span>
+              </div>
             </div>
-            <div class="flex items-center gap-1 text-sm font-semibold text-[#20231f]">
-              <span class="text-amber-500">★</span>
-              <span>{{ vehicle.rating }}</span>
-              <span class="text-xs text-[#6b6d68]">({{ vehicle.reviews }})</span>
+
+            <!-- Car Image Container -->
+            <div class="relative my-4 overflow-hidden rounded-2xl bg-[#f5f3ed]">
+              <img
+                :src="publicAsset(vehicle.image)"
+                :alt="vehicle.name"
+                loading="lazy"
+                class="h-48 w-full rounded-2xl object-cover transition duration-500 group-hover:scale-105 sm:h-52"
+              />
+            </div>
+
+            <p class="text-xs text-[#6b6d68] mb-3">
+              {{ vehicle.description }}
+            </p>
+
+            <!-- Feature Badges Row (3 columns now) -->
+            <div class="grid grid-cols-3 gap-y-2.5 py-3 text-xs font-medium text-[#5f625d] text-center border-t border-b border-[#eceae4]">
+              <div class="flex flex-col items-center gap-1">
+                <span aria-hidden="true">🚗</span>
+                <span>{{ vehicle.transmission }}</span>
+              </div>
+              <div class="flex flex-col items-center gap-1">
+                <span aria-hidden="true">⭐</span>
+                <span>{{ vehicle.class }}</span>
+              </div>
+              <div class="flex flex-col items-center gap-1">
+                <span aria-hidden="true">💺</span>
+                <span>{{ vehicle.seats }}</span>
+              </div>
             </div>
           </div>
 
-          <!-- Car Image Container (Overflow hidden + rounded corners maintained on hover) -->
-          <div class="relative my-4 overflow-hidden rounded-2xl">
-            <img
-              :src="publicAsset(vehicle.image)"
-              :alt="vehicle.name"
-              loading="lazy"
-              class="h-48 w-full rounded-2xl object-cover transition duration-500 group-hover:scale-105 sm:h-52"
-            />
-          </div>
-
-          <!-- Feature Badges Row (Icon + Category Attribute) -->
-          <div class="grid grid-cols-2 gap-y-2.5 py-3 text-xs font-medium text-[#5f625d] sm:flex sm:flex-wrap sm:items-center sm:justify-between border-b border-[#eceae4]">
-            <div class="flex items-center gap-1.5">
-              <span aria-hidden="true">🚗</span>
-              <span>{{ vehicle.transmission }}</span>
-            </div>
-            <div class="flex items-center gap-1.5">
-              <span aria-hidden="true">⚡</span>
-              <span>{{ vehicle.capacity }}</span>
-            </div>
-            <div class="flex items-center gap-1.5">
-              <span aria-hidden="true">⭐</span>
-              <span>{{ vehicle.class }}</span>
-            </div>
-            <div class="flex items-center gap-1.5">
-              <span aria-hidden="true">💺</span>
-              <span>{{ vehicle.seats }}</span>
-            </div>
-          </div>
-
-          <!-- Action Button (Turns vibrant orange on hover) -->
+          <!-- Action Button -->
           <div class="mt-5">
             <NuxtLink
               to="/booking"
@@ -259,7 +287,53 @@ function publicAsset(path: string) {
         </article>
       </div>
 
-      <div class="mt-9 text-center">
+      <!-- Bottom Right Corner Back and Front Navigation Arrows -->
+      <div class="mt-10 flex items-center justify-end gap-3">
+        <button
+          type="button"
+          aria-label="Previous vehicle"
+          class="
+            flex size-12 cursor-pointer items-center justify-center
+            rounded-full border border-[#eceae4] bg-white text-[#20231f]
+            transition-colors shadow-xs
+            hover:border-[#f97316] hover:bg-[#f97316] hover:text-black
+          "
+          @click="prevVehiclePage"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            class="size-5"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+            stroke-width="2"
+          >
+            <path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7" />
+          </svg>
+        </button>
+
+        <button
+          type="button"
+          aria-label="Next vehicle"
+          class="
+            flex size-12 cursor-pointer items-center justify-center
+            rounded-full border border-[#eceae4] bg-white text-[#20231f]
+            transition-colors shadow-xs
+            hover:border-[#f97316] hover:bg-[#f97316] hover:text-black
+          "
+          @click="nextVehiclePage"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            class="size-5"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+            stroke-width="2"
+          >
+            <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
+          </svg>
+        </button>
       </div>
     </div>
   </section>
@@ -324,89 +398,6 @@ function publicAsset(path: string) {
           Explore Destinations
           <span class="ml-2" aria-hidden="true">→</span>
         </NuxtLink>
-      </div>
-    </div>
-  </section>
-
-  <!-- Testimonials -->
-  <section class="bg-[#f5f5f3] px-6 py-16 text-[#20231f] md:px-10 md:py-20">
-    <div class="mx-auto max-w-7xl">
-      <div class="max-w-2xl">
-        <p class="text-xs font-semibold uppercase tracking-[0.2em] text-[#bd6b28]">
-          Sample guest stories
-        </p>
-
-        <h2 class="mt-3 text-3xl font-semibold tracking-tight md:text-4xl">
-          Kind words from the road
-        </h2>
-
-        <p class="mt-4 text-base leading-7 text-[#6b6d68]">
-          A few sample stories about discovering Sri Lanka with Lankan Rides.
-        </p>
-      </div>
-
-      <div class="mt-10 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
-        <article
-          v-for="(testimonial, index) in testimonials"
-          :key="testimonial.name"
-          class="rounded-2xl border border-black/5 p-6 shadow-sm"
-          :class="
-            index === 2
-              ? 'bg-[#18392d] text-white'
-              : 'bg-white text-[#20231f]'
-          "
-        >
-          <div class="flex items-start justify-between gap-4">
-            <div class="flex items-center gap-3">
-              <div
-                class="flex size-11 shrink-0 items-center justify-center rounded-full text-sm font-semibold"
-                :class="
-                  index === 2
-                    ? 'bg-white/15 text-white'
-                    : 'bg-[#ffedd5] text-[#8f4c18]'
-                "
-                aria-hidden="true"
-              >
-                {{ testimonial.name.slice(0, 1) }}
-              </div>
-
-              <div>
-                <h3 class="font-semibold">{{ testimonial.name }}</h3>
-                <p
-                  class="mt-0.5 text-xs"
-                  :class="index === 2 ? 'text-white/65' : 'text-[#777a74]'"
-                >
-                  {{ testimonial.detail }}
-                </p>
-              </div>
-            </div>
-
-            <span
-              class="shrink-0 text-sm tracking-[0.12em] text-[#f97316]"
-              aria-label="5 out of 5 stars"
-            >
-              ★★★★★
-            </span>
-          </div>
-
-          <p
-            class="mt-6 text-sm leading-6"
-            :class="index === 2 ? 'text-white/85' : 'text-[#555852]'"
-          >
-            “{{ testimonial.quote }}”
-          </p>
-
-          <span
-            class="mt-5 inline-flex rounded-full px-2.5 py-1 text-[10px] font-semibold uppercase tracking-wider"
-            :class="
-              index === 2
-                ? 'bg-white/10 text-white/70'
-                : 'bg-[#f2f2ef] text-[#777a74]'
-            "
-          >
-            Sample review
-          </span>
-        </article>
       </div>
     </div>
   </section>

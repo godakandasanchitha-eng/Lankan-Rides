@@ -29,6 +29,7 @@ export interface DestinationItem {
 }
 
 export const destinationsData: DestinationItem[] = [
+  // 1. Ella (Top Favorite)
   {
     slug: 'ella',
     name: 'Ella',
@@ -64,6 +65,7 @@ export const destinationsData: DestinationItem[] = [
       distance: '~210 km',
     },
   },
+  // 2. Kandy
   {
     slug: 'kandy',
     name: 'Kandy',
@@ -99,6 +101,7 @@ export const destinationsData: DestinationItem[] = [
       distance: '~120 km',
     },
   },
+  // 3. Galle
   {
     slug: 'galle',
     name: 'Galle',
@@ -134,6 +137,7 @@ export const destinationsData: DestinationItem[] = [
       distance: '~130 km',
     },
   },
+  // 4. Mirissa
   {
     slug: 'mirissa',
     name: 'Mirissa',
@@ -169,6 +173,142 @@ export const destinationsData: DestinationItem[] = [
       distance: '~155 km',
     },
   },
+  // 5. Sigiriya
+  {
+    slug: 'sigiriya',
+    name: 'Sigiriya',
+    eyebrow: 'Ancient Wonder',
+    caption: 'Ancient history and wide-open landscapes.',
+    image: '/Sigiriya.webp',
+    gallery: ['/Sigiriya.webp', '/kandy.webp', '/Ella.webp'],
+    region: 'Matale District, Central Province',
+    rating: '4.9',
+    overview:
+      'Rise above the jungle canopy by scaling the legendary 5th-century rock fortress of Sigiriya, featuring ancient frescoes, water gardens, and breathtaking panoramic views.',
+    moreOverview:
+      'A private ride makes exploring the Cultural Triangle smooth and comfortable, allowing easy connections between Sigiriya, Dambulla Cave Temple, and ancient Polonnaruwa.',
+    activities: [
+      { name: 'Lion Rock Climb', tag: 'History' },
+      { name: 'Water Gardens', tag: 'Architecture' },
+      { name: 'Pidurangala Rock Sunrise', tag: 'Views' },
+      { name: 'Village Safari Tour', tag: 'Culture' },
+    ],
+    destinationInfo: {
+      timeFromAirport: 'From Airport (CMB) : 3.5 hrs',
+      timeFromColombo: 'From Colombo City : 4 hrs',
+      weather: 'Weather : Warm & dry (24°C – 32°C)',
+      bestSeason: 'Best Time : Jan – April',
+      idealStay: 'Elevation : 370 m above sea level',
+    },
+    tripDetails: {
+      route: 'Colombo / CMB  →  Sigiriya',
+      recommendedStay: '1 – 2 Days, Cultural Triangle',
+      vehicleType: 'SUV or Sedan',
+      distance: '~170 km',
+    },
+  },
+  // 6. Nuwara Eliya
+  {
+    slug: 'nuwara-eliya',
+    name: 'Nuwara Eliya',
+    eyebrow: 'Little England',
+    caption: 'Rolling tea hills, colonial architecture, and crisp mountain air.',
+    image: '/Nuwara-eliya.webp',
+    gallery: ['/Nuwara-eliya.webp', '/Ella.webp', '/kandy.webp'],
+    region: 'Nuwara Eliya District, Central Province',
+    rating: '4.8',
+    overview:
+      'Known as Little England, Nuwara Eliya boasts colonial-era bungalows, manicured gardens, waterfalls, and endless emerald tea plantations wrapped in cool mountain mist.',
+    moreOverview:
+      'Enjoy a scenic highland drive through waterfalls like Ramboda and tour historic tea factories with a knowledgeable local driver.',
+    activities: [
+      { name: 'Horton Plains & World’s End', tag: 'Hiking' },
+      { name: 'Gregory Lake Walk', tag: 'Scenic' },
+      { name: 'Tea Factory Visit', tag: 'Culture' },
+      { name: 'Victoria Park Stroll', tag: 'Nature' },
+    ],
+    destinationInfo: {
+      timeFromAirport: 'From Airport (CMB) : 5 hrs',
+      timeFromColombo: 'From Colombo City : 4.5 hrs',
+      weather: 'Weather : Cool & crisp (12°C – 20°C)',
+      bestSeason: 'Best Time : Feb – May',
+      idealStay: 'Elevation : 1,868 m above sea level',
+    },
+    tripDetails: {
+      route: 'Colombo / CMB  →  Nuwara Eliya',
+      recommendedStay: '2 Days, Hill Country',
+      vehicleType: 'SUV or Saloon',
+      distance: '~160 km',
+    },
+  },
+  // 7. Yala National Park
+  {
+    slug: 'yala',
+    name: 'Yala National Park',
+    eyebrow: 'Wildlife Safari',
+    caption: 'Spot majestic leopards and wild elephants in their natural habitat.',
+    image: '/Yala-national-park.webp',
+    gallery: ['/Yala-national-park.webp', '/Mirissa.webp', '/Udawalawe.webp'],
+    region: 'Southern & Uva Provinces',
+    rating: '4.9',
+    overview:
+      'Yala is Sri Lanka’s premier national park, renowned for having one of the highest leopard densities in the world alongside elephants, sloth bears, and vibrant birdlife.',
+    moreOverview:
+      'A private transfer brings you straight to your safari lodge or park gates for morning and evening game drives in 4x4 jeeps.',
+    activities: [
+      { name: 'Leopard Safari Game Drive', tag: 'Wildlife' },
+      { name: 'Bird Watching Lagoons', tag: 'Nature' },
+      { name: 'Camping & Luxury Lodges', tag: 'Stay' },
+    ],
+    destinationInfo: {
+      timeFromAirport: 'From Airport (CMB) : 5 hrs',
+      timeFromColombo: 'From Colombo City : 4.5 hrs',
+      weather: 'Weather : Hot & dry (28°C – 34°C)',
+      bestSeason: 'Best Time : Feb – July (Park open)',
+      idealStay: 'Region : Southeastern Coast',
+    },
+    tripDetails: {
+      route: 'Colombo / Galle  →  Yala',
+      recommendedStay: '1 – 2 Days, Safari',
+      vehicleType: 'SUV or Sedan',
+      distance: '~250 km',
+    },
+  },
+  // 8. Colombo
+  {
+    slug: 'colombo',
+    name: 'Colombo',
+    eyebrow: 'Capital Energy',
+    caption: 'City energy, world-class dining, and seaside sunsets.',
+    image: '/Colombo.webp',
+    gallery: ['/Colombo.webp', '/Galle.webp', '/Kandy-1.webp'],
+    region: 'Western Province',
+    rating: '4.7',
+    overview:
+      'Sri Lanka’s vibrant commercial capital blends modern skyscrapers, colonial heritage architecture, bustling street markets, and golden sunset views along Galle Face Green.',
+    moreOverview:
+      'Your ideal starting or ending hub for airport transfers, city shopping, and coastal dining.',
+    activities: [
+      { name: 'Galle Face Green Sunset', tag: 'Coastal' },
+      { name: 'Pettah Bazaar Shopping', tag: 'Culture' },
+      { name: 'Gangaramaya Temple', tag: 'Heritage' },
+      { name: 'Ministry of Crab Dining', tag: 'Food' },
+    ],
+    destinationInfo: {
+      timeFromAirport: 'From Airport (CMB) : 45 min',
+      timeFromColombo: 'From Colombo City : 0 min',
+      weather: 'Weather : Tropical & humid (26°C – 32°C)',
+      bestSeason: 'Best Time : Year-round',
+      idealStay: 'Hub : Western Seaboard',
+    },
+    tripDetails: {
+      route: 'Airport (CMB)  →  Colombo City',
+      recommendedStay: '1 Day, City Stop',
+      vehicleType: 'Saloon or Sedan',
+      distance: '~35 km',
+    },
+  },
+  // 9. Arugam Bay
   {
     slug: 'arugam-bay',
     name: 'Arugam Bay',
@@ -179,16 +319,13 @@ export const destinationsData: DestinationItem[] = [
     region: 'Ampara District, Eastern Province',
     rating: '4.8',
     overview:
-      'On Sri Lanka’s sun-drenched eastern shore, Arugam Bay pairs world-renowned point breaks with tranquil lagoons and nearby wildlife parks. It is a favorite next stop after exploring Ella in the hill country.',
+      'On Sri Lanka’s sun-drenched eastern shore, Arugam Bay pairs world-renowned point breaks with tranquil lagoons and nearby wildlife parks.',
     moreOverview:
-      'Beyond the surf breaks at Main Point and Whiskey Point, a private vehicle lets you venture out to Kumana National Park for wildlife safaris, Pottuvil Lagoon mangrove tours, and ancient forest monasteries.',
+      'A favorite surf and beach destination, easily accessible via scenic drives from Ella or the cultural triangle.',
     activities: [
       { name: 'Main Point Surfing', tag: 'Surfing' },
       { name: 'Elephant Rock Sunset', tag: 'Views' },
       { name: 'Kumana Safari Drive', tag: 'Wildlife' },
-      { name: 'Pottuvil Lagoon Boat', tag: 'Nature' },
-      { name: 'Whiskey Point Beach', tag: 'Coast' },
-      { name: 'Muhudu Maha Viharaya', tag: 'Heritage' },
     ],
     destinationInfo: {
       timeFromAirport: 'From Airport (CMB) : 6.5 – 7 hrs',
@@ -202,6 +339,171 @@ export const destinationsData: DestinationItem[] = [
       recommendedStay: '3 – 5 Days, Surf & Safari',
       vehicleType: 'SUV or Spacious Sedan',
       distance: '~320 km',
+    },
+  },
+  // 10. Adam’s Peak
+  {
+    slug: 'adams-peak',
+    name: 'Adam’s Peak',
+    eyebrow: 'Sacred Mountain',
+    caption: 'Hike up the sacred mountain trail to catch a breathtaking sunrise.',
+    image: "/Adam's-peak.webp",
+    gallery: ["/Adam's-peak.webp", '/Ella.webp', '/Nuwara-eliya.webp'],
+    region: 'Ratnapura / Maskeliya',
+    rating: '4.7',
+    overview:
+      'A sacred pilgrimage mountain where thousands climb thousands of stone steps under starlight to witness the legendary sunrise shadow from the summit.',
+    moreOverview:
+      'Best climbed during pilgrimage season (December to May). Our drivers provide comfortable overnight transfers to the base trail.',
+    activities: [
+      { name: 'Night Summit Climb', tag: 'Trekking' },
+      { name: 'Sunrise Shadow Viewing', tag: 'Panorama' },
+      { name: 'Waterfall & Valley Stops', tag: 'Nature' },
+    ],
+    destinationInfo: {
+      timeFromAirport: 'From Airport (CMB) : 4.5 hrs',
+      timeFromColombo: 'From Colombo City : 4 hrs',
+      weather: 'Weather : Very cold at night (8°C – 18°C)',
+      bestSeason: 'Best Time : Dec – May (Full Moon Poya)',
+      idealStay: 'Elevation : 2,243 m',
+    },
+    tripDetails: {
+      route: 'Colombo  →  Maskeliya Base',
+      recommendedStay: '1 Night / Early Climb',
+      vehicleType: 'SUV or Saloon',
+      distance: '~140 km',
+    },
+  },
+  // 11. Trincomalee
+  {
+    slug: 'trincomalee',
+    name: 'Trincomalee',
+    eyebrow: 'Eastern Paradise',
+    caption: 'Discover crystal-clear blue bays and pristine white-sand shores.',
+    image: '/Trincomalee.webp',
+    gallery: ['/Trincomalee.webp', '/Arugambay.webp', '/Mirissa.webp'],
+    region: 'Eastern Province',
+    rating: '4.8',
+    overview:
+      'Home to natural deep-water harbors, pristine white-sand beaches at Nilaveli, and ancient cliffside temples like Koneswaram.',
+    moreOverview:
+      'Ideal for dolphin watching, snorkeling around Pigeon Island, and relaxing on uncrowded eastern beaches.',
+    activities: [
+      { name: 'Nilaveli Beach Relaxing', tag: 'Beach' },
+      { name: 'Pigeon Island Snorkeling', tag: 'Marine' },
+      { name: 'Koneswaram Temple Visit', tag: 'Culture' },
+    ],
+    destinationInfo: {
+      timeFromAirport: 'From Airport (CMB) : 5 hrs',
+      timeFromColombo: 'From Colombo City : 5.5 hrs',
+      weather: 'Weather : Tropical sunshine (27°C – 33°C)',
+      bestSeason: 'Best Time : April – October',
+      idealStay: 'Coastline : Northeast Bay',
+    },
+    tripDetails: {
+      route: 'Colombo / CMB  →  Trincomalee',
+      recommendedStay: '3 Days, East Coast',
+      vehicleType: 'SUV or Sedan',
+      distance: '~260 km',
+    },
+  },
+  // 12. Udawalawe
+  {
+    slug: 'udawalawe',
+    name: 'Udawalawe',
+    eyebrow: 'Elephant Transit',
+    caption: 'Witness majestic wild elephants roaming free across open grasslands.',
+    image: '/Udawalawe.webp',
+    gallery: ['/Udawalawe.webp', '/Yala-national-park.webp', '/Embilipitiya.webp'],
+    region: 'Sabaragamuwa & Uva Provinces',
+    rating: '4.8',
+    overview:
+      'Famous for guaranteed wild elephant sightings, Udawalawe National Park surrounds the scenic reservoir and hosts the Elephant Transit Home.',
+    moreOverview:
+      'An incredible safari alternative with open grasslands ensuring unobstructed wildlife photography.',
+    activities: [
+      { name: 'Elephant Transit Home Visit', tag: 'Wildlife' },
+      { name: 'Jeep Safari Tour', tag: 'Adventure' },
+      { name: 'Reservoir Birdwatching', tag: 'Nature' },
+    ],
+    destinationInfo: {
+      timeFromAirport: 'From Airport (CMB) : 4 hrs',
+      timeFromColombo: 'From Colombo City : 3.5 hrs',
+      weather: 'Weather : Warm & dry (27°C – 33°C)',
+      bestSeason: 'Best Time : Year-round',
+      idealStay: 'Region : Southern Plains',
+    },
+    tripDetails: {
+      route: 'Colombo / Galle  →  Udawalawe',
+      recommendedStay: '1 Day Safari Stop',
+      vehicleType: 'SUV or Saloon',
+      distance: '~160 km',
+    },
+  },
+  // 13. Tangalle
+  {
+    slug: 'tangalle',
+    name: 'Tangalle',
+    eyebrow: 'Secluded Shores',
+    caption: 'Relax on secluded, dramatic southern beaches framed by coconut palms.',
+    image: '/Tangalle.webp',
+    gallery: ['/Tangalle.webp', '/Mirissa.webp', '/Galle.webp'],
+    region: 'Hambantota District, Southern Province',
+    rating: '4.8',
+    overview:
+      'Tangalle offers dramatic rocky coves, tranquil lagoons, and expansive golden beaches far away from busy tourist crowds.',
+    moreOverview:
+      'Perfect for couples and travelers seeking quiet luxury boutique resorts along the deep south coast.',
+    activities: [
+      { name: 'Rekawa Turtle Watching', tag: 'Wildlife' },
+      { name: 'Silent Beach Relaxation', tag: 'Beach' },
+      { name: 'Lagoon Kayaking', tag: 'Nature' },
+    ],
+    destinationInfo: {
+      timeFromAirport: 'From Airport (CMB) : 3.5 hrs',
+      timeFromColombo: 'From Colombo City : 3 hrs',
+      weather: 'Weather : Coastal warmth (25°C – 31°C)',
+      bestSeason: 'Best Time : November – April',
+      idealStay: 'Coastline : Deep South',
+    },
+    tripDetails: {
+      route: 'Colombo / Galle  →  Tangalle',
+      recommendedStay: '2 Days, Secluded Coast',
+      vehicleType: 'SUV or Sedan',
+      distance: '~195 km',
+    },
+  },
+  // 14. Bentota
+  {
+    slug: 'bentota',
+    name: 'Bentota',
+    eyebrow: 'Water Sports Hub',
+    caption: 'Unwind on golden resort beaches and tranquil river estuaries.',
+    image: '/Bentota.webp',
+    gallery: ['/Bentota.webp', '/Galle.webp', '/Mirissa.webp'],
+    region: 'Galle District, Southern Province',
+    rating: '4.7',
+    overview:
+      'Renowned for luxury beach resorts, jet skiing, windsurfing on the Bentota River lagoon, and turtle conservation hatcheries.',
+    moreOverview:
+      'A convenient first or last beach stop just down the expressway from Colombo.',
+    activities: [
+      { name: 'River Safari & Mangroves', tag: 'Nature' },
+      { name: 'Jet Skiing & Watersports', tag: 'Adventure' },
+      { name: 'Brief Garden Tour', tag: 'Art' },
+    ],
+    destinationInfo: {
+      timeFromAirport: 'From Airport (CMB) : 2 hrs',
+      timeFromColombo: 'From Colombo City : 1.5 hrs',
+      weather: 'Weather : Tropical coastal (26°C – 31°C)',
+      bestSeason: 'Best Time : November – April',
+      idealStay: 'Coastline : Southwest Resort Coast',
+    },
+    tripDetails: {
+      route: 'Colombo / CMB  →  Bentota',
+      recommendedStay: '2 Days, Beach & Watersports',
+      vehicleType: 'Saloon or Sedan',
+      distance: '~85 km',
     },
   },
 ]
