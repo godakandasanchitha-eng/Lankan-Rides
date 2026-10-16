@@ -122,8 +122,9 @@ watch(() => route.path, () => {
 
 <template>
   <div class="min-h-screen bg-[#242124] text-white">
+    <!-- Header wrapper is relative so the mobile menu can absolute-position cleanly over the page -->
     <header class="sticky top-0 z-50 bg-transparent px-3 py-3 md:px-6">
-      <div class="mx-auto max-w-7xl rounded-[28px]">
+      <div class="relative mx-auto max-w-7xl rounded-[28px]">
         <nav
           class="grid min-h-14 grid-cols-[1fr_auto] items-center rounded-full bg-black px-5 py-3 transition-shadow duration-200 md:grid-cols-[1fr_auto_1fr] md:px-6"
           :class="isScrollingUp ? 'shadow-md shadow-black/30' : 'shadow-none'"
@@ -225,12 +226,13 @@ watch(() => route.path, () => {
           </div>
         </nav>
 
-        <!-- Mobile Drawer Overlay Menu -->
+        <!-- Mobile Drawer Overlay Menu (Absolute positioned to float cleanly over hero/page content) -->
         <div
           v-if="isMobileMenuOpen"
           class="
-            mt-3 overflow-hidden rounded-3xl bg-black/95 p-6 text-white
-            backdrop-blur-lg border border-white/10
+            absolute inset-x-0 top-20 z-50 overflow-hidden rounded-3xl
+            bg-black/95 p-6 text-white backdrop-blur-xl border border-white/15
+            shadow-2xl
             md:hidden
           "
         >
