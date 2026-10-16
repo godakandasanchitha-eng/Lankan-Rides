@@ -321,7 +321,7 @@ if (!destination.value) {
             </div>
           </div>
 
-          <!-- Right Column: Details Sidebar Card -->
+          <!-- Right Column: Details Sidebar Card (Drop-down arrows removed) -->
           <aside class="rounded-2xl border border-[#eceae4] bg-white p-6 shadow-sm lg:col-span-4">
             <h3 class="text-lg font-medium text-[#20231f]">
               Details
@@ -329,7 +329,7 @@ if (!destination.value) {
 
             <div class="mt-4 divide-y divide-[#eceae4] border-t border-[#eceae4]">
               <div class="py-4">
-                <div class="flex items-center justify-between text-xs text-[#6b6d68]">
+                <div class="text-xs font-medium text-[#6b6d68]">
                   <span class="inline-flex items-center gap-1.5">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
@@ -348,7 +348,6 @@ if (!destination.value) {
                     </svg>
                     Popular Route
                   </span>
-                  <span aria-hidden="true">⌄</span>
                 </div>
                 <p class="mt-2 text-sm font-medium text-[#20231f]">
                   {{ destination.tripDetails.route }}
@@ -356,7 +355,7 @@ if (!destination.value) {
               </div>
 
               <div class="py-4">
-                <div class="flex items-center justify-between text-xs text-[#6b6d68]">
+                <div class="text-xs font-medium text-[#6b6d68]">
                   <span class="inline-flex items-center gap-1.5">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
@@ -374,7 +373,6 @@ if (!destination.value) {
                     </svg>
                     Suggested Duration
                   </span>
-                  <span aria-hidden="true">⌄</span>
                 </div>
                 <p class="mt-2 text-sm font-medium text-[#20231f]">
                   {{ destination.tripDetails.recommendedStay }}
@@ -382,7 +380,7 @@ if (!destination.value) {
               </div>
 
               <div class="py-4">
-                <div class="flex items-center justify-between text-xs text-[#6b6d68]">
+                <div class="text-xs font-medium text-[#6b6d68]">
                   <span class="inline-flex items-center gap-1.5">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
@@ -401,7 +399,6 @@ if (!destination.value) {
                     </svg>
                     Recommended Vehicle
                   </span>
-                  <span aria-hidden="true">⌄</span>
                 </div>
                 <p class="mt-2 text-sm font-medium text-[#20231f]">
                   {{ destination.tripDetails.vehicleType }}

@@ -1,7 +1,8 @@
 <script setup lang="ts">
-import { onBeforeUnmount, onMounted, ref } from 'vue'
+import { onBeforeUnmount, onMounted, ref, watch } from 'vue'
 
 const isScrollingUp = ref(false)
+const isMobileMenuOpen = ref(false)
 const route = useRoute()
 const { app } = useRuntimeConfig()
 let previousScrollY = 0
@@ -112,6 +113,11 @@ onBeforeUnmount(() => {
     clearInterval(ctaInterval)
   }
 })
+
+// Close mobile menu automatically on route change
+watch(() => route.path, () => {
+  isMobileMenuOpen.value = false
+})
 </script>
 
 <template>
@@ -138,7 +144,7 @@ onBeforeUnmount(() => {
             </span>
           </NuxtLink>
 
-          <!-- Center navigation -->
+          <!-- Center navigation (Desktop) -->
           <div class="hidden items-center gap-1 rounded-full bg-[#19191b] p-1 md:flex">
             <NuxtLink
               to="/"
@@ -173,14 +179,111 @@ onBeforeUnmount(() => {
             </NuxtLink>
           </div>
 
-          <!-- Contact button -->
-          <NuxtLink
-            to="/booking"
-            class="justify-self-end rounded-full bg-[#f97316] px-4 py-2.5 text-sm font-semibold text-black transition-colors hover:bg-[#ea580c] sm:px-5"
-          >
-            Contact us
-          </NuxtLink>
+          <!-- Right side: Contact Button (Desktop) & Hamburger Toggle (Mobile) -->
+          <div class="flex items-center gap-3 justify-self-end">
+            <NuxtLink
+              to="/booking"
+              class="hidden rounded-full bg-[#f97316] px-4 py-2.5 text-sm font-semibold text-black transition-colors hover:bg-[#ea580c] sm:px-5 md:inline-block"
+            >
+              Contact us
+            </NuxtLink>
+
+            <!-- Hamburger Button (Mobile Only) -->
+            <button
+              type="button"
+              aria-label="Toggle mobile menu"
+              class="
+                flex size-11 items-center justify-center rounded-full
+                bg-[#19191b] text-white transition-colors
+                hover:bg-[#f97316] hover:text-black
+                md:hidden
+              "
+              @click="isMobileMenuOpen = !isMobileMenuOpen"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="size-6"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+                stroke-width="2"
+              >
+                <path
+                  v-if="!isMobileMenuOpen"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M4 6h16M4 12h16M4 18h16"
+                />
+                <path
+                  v-else
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M6 18L18 6M6 6l12 12"
+                />
+              </svg>
+            </button>
+          </div>
         </nav>
+
+        <!-- Mobile Drawer Overlay Menu -->
+        <div
+          v-if="isMobileMenuOpen"
+          class="
+            mt-3 overflow-hidden rounded-3xl bg-black/95 p-6 text-white
+            backdrop-blur-lg border border-white/10
+            md:hidden
+          "
+        >
+          <div class="flex flex-col space-y-3">
+            <NuxtLink
+              to="/"
+              class="rounded-2xl px-4 py-3 text-base font-medium transition-colors"
+              :class="route.path === '/' ? 'bg-[#f97316] text-black font-semibold' : 'hover:bg-white/10'"
+              @click="isMobileMenuOpen = false"
+            >
+              Home
+            </NuxtLink>
+
+            <NuxtLink
+              to="/services"
+              class="rounded-2xl px-4 py-3 text-base font-medium transition-colors"
+              :class="route.path === '/services' ? 'bg-[#f97316] text-black font-semibold' : 'hover:bg-white/10'"
+              @click="isMobileMenuOpen = false"
+            >
+              Our Services
+            </NuxtLink>
+
+            <NuxtLink
+              to="/destinations"
+              class="rounded-2xl px-4 py-3 text-base font-medium transition-colors"
+              :class="route.path === '/destinations' ? 'bg-[#f97316] text-black font-semibold' : 'hover:bg-white/10'"
+              @click="isMobileMenuOpen = false"
+            >
+              Destinations
+            </NuxtLink>
+
+            <NuxtLink
+              to="/about"
+              class="rounded-2xl px-4 py-3 text-base font-medium transition-colors"
+              :class="route.path === '/about' ? 'bg-[#f97316] text-black font-semibold' : 'hover:bg-white/10'"
+              @click="isMobileMenuOpen = false"
+            >
+              About Us
+            </NuxtLink>
+
+            <NuxtLink
+              to="/booking"
+              class="
+                mt-2 flex items-center justify-center rounded-2xl bg-[#f97316]
+                px-5 py-3.5 text-base font-semibold text-black
+                transition-colors hover:bg-[#ea580c]
+              "
+              @click="isMobileMenuOpen = false"
+            >
+              Contact Us
+            </NuxtLink>
+          </div>
+        </div>
       </div>
     </header>
 
@@ -285,7 +388,6 @@ onBeforeUnmount(() => {
                   v-for="(card, index) in ctaCards"
                   :key="card.title"
                   class="
-                    
                     absolute inset-x-3 flex items-center justify-between gap-4
                     rounded-2xl border px-5
                     transition-all duration-700
@@ -382,7 +484,7 @@ onBeforeUnmount(() => {
 
     <!-- Footer -->
     <footer class="bg-black px-6 pt-16 pb-8 text-white">
-      <div class="mx-auto grid max-w-7xl gap-12 lg:grid-cols-12 lg:items-start">
+      <div class="mx-auto max-w-7xl grid gap-12 lg:grid-cols-12 lg:items-start">
         <!-- Left & Middle: Navigation Links -->
         <div class="grid grid-cols-2 gap-8 sm:grid-cols-2 lg:col-span-8">
           <ul class="space-y-4 text-xs font-semibold tracking-wider text-white">

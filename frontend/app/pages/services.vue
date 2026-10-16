@@ -63,7 +63,7 @@ const routeHighlights = [
   {
     name: 'Sigiriya',
     caption: 'Ancient rock fortresses, royal gardens, and cultural heartlands.',
-    image: '/Ella.webp',
+    image: '/Sigiriya.webp',
   },
 ]
 

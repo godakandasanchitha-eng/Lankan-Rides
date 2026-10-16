@@ -180,7 +180,7 @@ export const destinationsData: DestinationItem[] = [
     eyebrow: 'Ancient Wonder',
     caption: 'Ancient history and wide-open landscapes.',
     image: '/Sigiriya.webp',
-    gallery: ['/Sigiriya.webp', '/kandy.webp', '/Ella.webp'],
+    gallery: ['/Sigiriya-3.webp', '/Sigiriya-1.webp', '/Sigiriya-2.webp'],
     region: 'Matale District, Central Province',
     rating: '4.9',
     overview:
@@ -214,7 +214,7 @@ export const destinationsData: DestinationItem[] = [
     eyebrow: 'Little England',
     caption: 'Rolling tea hills, colonial architecture, and crisp mountain air.',
     image: '/Nuwara-eliya.webp',
-    gallery: ['/Nuwara-eliya.webp', '/Ella.webp', '/kandy.webp'],
+    gallery: ['/Nuwara-eliya-1.webp', '/Nuwara-eliya-2.webp', '/Nuwara-eliya-3.webp'],
     region: 'Nuwara Eliya District, Central Province',
     rating: '4.8',
     overview:
@@ -248,7 +248,7 @@ export const destinationsData: DestinationItem[] = [
     eyebrow: 'Wildlife Safari',
     caption: 'Spot majestic leopards and wild elephants in their natural habitat.',
     image: '/Yala-national-park.webp',
-    gallery: ['/Yala-national-park.webp', '/Mirissa.webp', '/Udawalawe.webp'],
+    gallery: ['/Yala-3.webp', '/Yala-1.webp', '/Yala-2.webp'],
     region: 'Southern & Uva Provinces',
     rating: '4.9',
     overview:
@@ -281,7 +281,7 @@ export const destinationsData: DestinationItem[] = [
     eyebrow: 'Capital Energy',
     caption: 'City energy, world-class dining, and seaside sunsets.',
     image: '/Colombo.webp',
-    gallery: ['/Colombo.webp', '/Galle.webp', '/Kandy-1.webp'],
+    gallery: ['/Colombo-1.webp', '/Colombo-2.webp', '/Colombo-3.webp'],
     region: 'Western Province',
     rating: '4.7',
     overview:
@@ -381,7 +381,7 @@ export const destinationsData: DestinationItem[] = [
     eyebrow: 'Eastern Paradise',
     caption: 'Discover crystal-clear blue bays and pristine white-sand shores.',
     image: '/Trincomalee.webp',
-    gallery: ['/Trincomalee.webp', '/Arugambay.webp', '/Mirissa.webp'],
+    gallery: ['/Trincomalee-1.webp', '/Trincomalee-2.webp', '/Trincomalee-3.webp'],
     region: 'Eastern Province',
     rating: '4.8',
     overview:
@@ -414,7 +414,7 @@ export const destinationsData: DestinationItem[] = [
     eyebrow: 'Elephant Transit',
     caption: 'Witness majestic wild elephants roaming free across open grasslands.',
     image: '/Udawalawe.webp',
-    gallery: ['/Udawalawe.webp', '/Yala-national-park.webp', '/Embilipitiya.webp'],
+    gallery: ['/Udawalawe-1.webp', '/Udawalawe-2.webp', '/Udawalawe-3.webp'],
     region: 'Sabaragamuwa & Uva Provinces',
     rating: '4.8',
     overview:
@@ -447,7 +447,7 @@ export const destinationsData: DestinationItem[] = [
     eyebrow: 'Secluded Shores',
     caption: 'Relax on secluded, dramatic southern beaches framed by coconut palms.',
     image: '/Tangalle.webp',
-    gallery: ['/Tangalle.webp', '/Mirissa.webp', '/Galle.webp'],
+    gallery: ['/Tangalle.webp', '/Mirissa.webp', '/Tangalle-1.webp'],
     region: 'Hambantota District, Southern Province',
     rating: '4.8',
     overview:
@@ -480,7 +480,7 @@ export const destinationsData: DestinationItem[] = [
     eyebrow: 'Water Sports Hub',
     caption: 'Unwind on golden resort beaches and tranquil river estuaries.',
     image: '/Bentota.webp',
-    gallery: ['/Bentota.webp', '/Galle.webp', '/Mirissa.webp'],
+    gallery: ['/Bentota-3.webp', '/Bentota-2.webp', '/Bentota-1.webp'],
     region: 'Galle District, Southern Province',
     rating: '4.7',
     overview:

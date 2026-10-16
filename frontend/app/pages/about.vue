@@ -93,7 +93,7 @@ const faqList = [
     </div>
   </section>
 
-  <!-- 2nd Section: About Lankan Rides Collage Section -->
+  <!-- 2nd Section: About Lankan Rides Collage Section (Responsive Bento Grid) -->
   <section class="bg-white px-5 py-16 text-[#20231f] md:px-8 md:py-24">
     <div class="mx-auto max-w-7xl text-center">
       <h2 class="text-3xl font-bold tracking-tight text-[#20231f] md:text-4xl lg:text-5xl">
@@ -103,32 +103,33 @@ const faqList = [
         Lankan Rides is a team of passionate local drivers dedicated to sharing Sri Lanka through safe, comfortable, and unhurried private journeys.
       </p>
 
-      <!-- 3-Column Grid (Left images, Center dark card, Right images) -->
-      <div class="mt-12 grid gap-6 md:grid-cols-3 lg:items-center">
-        <!-- Left Column (2 Stacked Images) -->
-        <div class="flex flex-col gap-6">
-          <div class="relative h-64 overflow-hidden rounded-3xl bg-[#20231f] shadow-sm sm:h-72">
+      <!-- Responsive Grid: 1 col on mobile, 2 cols on tablet (md), 3 cols on desktop (lg) -->
+      <div class="mt-12 grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3 lg:items-center">
+        <!-- Left Column: 2 Images Side-by-Side on Tablet, Stacked on Desktop -->
+        <div class="grid grid-cols-2 gap-4 md:col-span-2 lg:col-span-1 lg:flex lg:flex-col lg:gap-6">
+          <div class="w-full overflow-hidden rounded-3xl bg-[#20231f] shadow-sm">
             <img
               :src="publicAsset('/Services-1.webp')"
               alt="Coastal road trip SUV transfer"
-              class="h-full w-full object-cover object-center transition duration-500 hover:scale-105"
+              class="w-full h-auto aspect-[4/3] object-cover object-center transition duration-500 hover:scale-105"
             />
           </div>
-          <div class="relative h-64 overflow-hidden rounded-3xl bg-[#20231f] shadow-sm sm:h-72">
+          <div class="w-full overflow-hidden rounded-3xl bg-[#20231f] shadow-sm">
             <img
               :src="publicAsset('/Services-2.webp')"
               alt="Friendly local driver greeting guests"
-              class="h-full w-full object-cover object-center transition duration-500 hover:scale-105"
+              class="w-full h-auto aspect-[4/3] object-cover object-center transition duration-500 hover:scale-105"
             />
           </div>
         </div>
 
-        <!-- Center Column (Dark Card with Grid Pattern) -->
+        <!-- Center Column (Dark Card - Spans full width on tablet) -->
         <div
           class="
             relative isolate flex flex-col justify-between overflow-hidden
-            rounded-3xl bg-[#141416] p-8 text-white shadow-xl
-            md:min-h-[580px] md:p-10
+            rounded-3xl bg-[#141416] p-8 text-white shadow-xl w-full
+            md:col-span-2 md:min-h-[500px] md:p-10
+            lg:col-span-1 lg:min-h-[580px]
           "
         >
           <!-- Subtle Grid Background Pattern -->
@@ -181,20 +182,20 @@ const faqList = [
           </div>
         </div>
 
-        <!-- Right Column (2 Stacked Images) -->
-        <div class="flex flex-col gap-6">
-          <div class="relative h-64 overflow-hidden rounded-3xl bg-[#20231f] shadow-sm sm:h-72">
+        <!-- Right Column: 2 Images Side-by-Side on Tablet, Stacked on Desktop -->
+        <div class="grid grid-cols-2 gap-4 md:col-span-2 lg:col-span-1 lg:flex lg:flex-col lg:gap-6">
+          <div class="w-full overflow-hidden rounded-3xl bg-[#20231f] shadow-sm">
             <img
               :src="publicAsset('/Services-3.webp')"
               alt="Sigiriya Rock Fortress"
-              class="h-full w-full object-cover object-center transition duration-500 hover:scale-105"
+              class="w-full h-auto aspect-[4/3] object-cover object-center transition duration-500 hover:scale-105"
             />
           </div>
-          <div class="relative h-64 overflow-hidden rounded-3xl bg-[#20231f] shadow-sm sm:h-72">
+          <div class="w-full overflow-hidden rounded-3xl bg-[#20231f] shadow-sm">
             <img
               :src="publicAsset('/Services-4.webp')"
               alt="Wildlife safari park excursion"
-              class="h-full w-full object-cover object-center transition duration-500 hover:scale-105"
+              class="w-full h-auto aspect-[4/3] object-cover object-center transition duration-500 hover:scale-105"
             />
           </div>
         </div>
@@ -202,36 +203,36 @@ const faqList = [
     </div>
   </section>
 
-  <!-- 3rd Section: Our Vision Section (Before FAQ, Matching Reference Layout) -->
+  <!-- 3rd Section: Our Vision Section -->
   <section class="bg-[#f8f7f3] px-5 py-16 text-[#20231f] md:px-8 lg:py-24">
     <div class="mx-auto max-w-7xl">
       <div class="grid gap-10 lg:grid-cols-12 lg:items-center lg:gap-14">
         <!-- Left Column: 2 Top Images + 1 Wide Bottom Image -->
-        <div class="grid grid-cols-2 gap-4 sm:gap-5 lg:col-span-6">
+        <div class="grid grid-cols-2 gap-4 sm:gap-5 lg:col-span-6 w-full">
           <!-- Top Left Image -->
-          <div class="relative h-48 overflow-hidden rounded-2xl bg-[#20231f] sm:h-60">
+          <div class="w-full overflow-hidden rounded-2xl bg-[#20231f]">
             <img
               :src="publicAsset('/Driver-showing-route.webp')"
               alt="Comfortable private saloon"
-              class="block h-full w-full object-cover object-center transition duration-500 hover:scale-105"
+              class="w-full h-auto aspect-[4/3] object-cover object-center transition duration-500 hover:scale-105"
             />
           </div>
 
           <!-- Top Right Image -->
-          <div class="relative h-48 overflow-hidden rounded-2xl bg-[#20231f] sm:h-60">
+          <div class="w-full overflow-hidden rounded-2xl bg-[#20231f]">
             <img
               :src="publicAsset('/Loading-luggage.webp')"
               alt="Spacious SUV for island tours"
-              class="block h-full w-full object-cover object-center transition duration-500 hover:scale-105"
+              class="w-full h-auto aspect-[4/3] object-cover object-center transition duration-500 hover:scale-105"
             />
           </div>
 
           <!-- Bottom Full-Width Image -->
-          <div class="relative col-span-2 h-56 overflow-hidden rounded-2xl bg-[#20231f] sm:h-64">
+          <div class="col-span-2 w-full overflow-hidden rounded-2xl bg-[#20231f]">
             <img
               :src="publicAsset('/SUV-Hill-country.webp')"
               alt="Scenic coastal drive in Sri Lanka"
-              class="block h-full w-full object-cover object-center transition duration-500 hover:scale-105"
+              class="w-full h-auto aspect-[16/9] object-cover object-center transition duration-500 hover:scale-105"
             />
           </div>
         </div>
