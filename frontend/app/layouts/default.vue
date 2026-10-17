@@ -491,7 +491,6 @@ watch(() => route.path, () => {
         <div class="grid grid-cols-2 gap-8 sm:grid-cols-2 lg:col-span-8">
           <ul class="space-y-4 text-xs font-semibold tracking-wider text-white">
             <li><NuxtLink to="/" class="hover:text-[#f97316]">HOME</NuxtLink></li>
-            <li><NuxtLink to="/fleet" class="hover:text-[#f97316]">OUR FLEET</NuxtLink></li>
             <li><NuxtLink to="/services" class="hover:text-[#f97316]">SERVICES</NuxtLink></li>
             <li><NuxtLink to="/destinations" class="hover:text-[#f97316]">DESTINATIONS</NuxtLink></li>
             <li><NuxtLink to="/booking" class="hover:text-[#f97316]">CONTACT US</NuxtLink></li>
