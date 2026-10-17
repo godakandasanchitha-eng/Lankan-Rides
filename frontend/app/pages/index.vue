@@ -84,20 +84,6 @@ const vehicles = [
   },
 ]
 
-const currentVehiclePage = ref(0)
-const vehiclesPerPage = 3
-
-const totalVehiclePages = Math.ceil(vehicles.length / vehiclesPerPage)
-
-function prevVehiclePage() {
-  currentVehiclePage.value =
-    (currentVehiclePage.value - 1 + totalVehiclePages) % totalVehiclePages
-}
-
-function nextVehiclePage() {
-  currentVehiclePage.value = (currentVehiclePage.value + 1) % totalVehiclePages
-}
-
 const testimonials = [
   {
     name: 'Nadeesha P.',
@@ -220,7 +206,7 @@ function publicAsset(path: string) {
       </div>
 
       <!-- Vehicle Cards Grid -->
-      <div class="mt-10 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+      <div class="mt-10 grid gap-6 md:grid-cols-2 lg:grid-cols-4">
         <article
           v-for="vehicle in vehicles"
           :key="vehicle.name"
@@ -257,22 +243,6 @@ function publicAsset(path: string) {
             <p class="text-xs text-[#6b6d68] mb-3">
               {{ vehicle.description }}
             </p>
-
-            <!-- Feature Badges Row (3 columns now) -->
-            <div class="grid grid-cols-3 gap-y-2.5 py-3 text-xs font-medium text-[#5f625d] text-center border-t border-b border-[#eceae4]">
-              <div class="flex flex-col items-center gap-1">
-                <span aria-hidden="true">🚗</span>
-                <span>{{ vehicle.transmission }}</span>
-              </div>
-              <div class="flex flex-col items-center gap-1">
-                <span aria-hidden="true">⭐</span>
-                <span>{{ vehicle.class }}</span>
-              </div>
-              <div class="flex flex-col items-center gap-1">
-                <span aria-hidden="true">💺</span>
-                <span>{{ vehicle.seats }}</span>
-              </div>
-            </div>
           </div>
 
           <!-- Action Button -->
@@ -285,55 +255,6 @@ function publicAsset(path: string) {
             </NuxtLink>
           </div>
         </article>
-      </div>
-
-      <!-- Bottom Right Corner Back and Front Navigation Arrows (Hidden on mobile screens, visible on md and up) -->
-      <div class="mt-10 hidden md:flex items-center justify-end gap-3">
-        <button
-          type="button"
-          aria-label="Previous vehicle"
-          class="
-            flex size-12 cursor-pointer items-center justify-center
-            rounded-full border border-[#eceae4] bg-white text-[#20231f]
-            transition-colors shadow-xs
-            hover:border-[#f97316] hover:bg-[#f97316] hover:text-black
-          "
-          @click="prevVehiclePage"
-        >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            class="size-5"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-            stroke-width="2"
-          >
-            <path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7" />
-          </svg>
-        </button>
-
-        <button
-          type="button"
-          aria-label="Next vehicle"
-          class="
-            flex size-12 cursor-pointer items-center justify-center
-            rounded-full border border-[#eceae4] bg-white text-[#20231f]
-            transition-colors shadow-xs
-            hover:border-[#f97316] hover:bg-[#f97316] hover:text-black
-          "
-          @click="nextVehiclePage"
-        >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            class="size-5"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-            stroke-width="2"
-          >
-            <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
-          </svg>
-        </button>
       </div>
     </div>
   </section>

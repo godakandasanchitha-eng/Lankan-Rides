@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { onBeforeUnmount, onMounted, ref, watch } from 'vue'
+import { nextTick, onBeforeUnmount, onMounted, ref, watch } from 'vue'
 
 const isScrollingUp = ref(false)
 const isMobileMenuOpen = ref(false)
@@ -24,6 +24,15 @@ function navLinkClass(path: string) {
   return route.path === path
     ? 'bg-[#f97316] text-black'
     : 'text-white/85 hover:bg-[#f97316] hover:text-black'
+}
+
+async function scrollToContactInfo() {
+  isMobileMenuOpen.value = false
+  await nextTick()
+  const el = document.getElementById('contact-info')
+  if (el) {
+    el.scrollIntoView({ behavior: 'smooth', block: 'center' })
+  }
 }
 
 // Auto-scrolling CTA cards (Car rental & Destination routes)
@@ -114,10 +123,22 @@ onBeforeUnmount(() => {
   }
 })
 
-// Close mobile menu automatically on route change
-watch(() => route.path, () => {
-  isMobileMenuOpen.value = false
-})
+// Close mobile menu automatically on route change & handle hash scrolling
+watch(
+  () => route.fullPath,
+  async () => {
+    isMobileMenuOpen.value = false
+    if (route.hash === '#contact-info') {
+      await nextTick()
+      setTimeout(() => {
+        const el = document.getElementById('contact-info')
+        if (el) {
+          el.scrollIntoView({ behavior: 'smooth', block: 'center' })
+        }
+      }, 150)
+    }
+  },
+)
 </script>
 
 <template>
@@ -180,11 +201,19 @@ watch(() => route.path, () => {
             </NuxtLink>
           </div>
 
-          <!-- Right side: Contact Button (Desktop) & Hamburger Toggle (Mobile) -->
-          <div class="flex items-center gap-3 justify-self-end">
+          <!-- Right side: Plan a Ride + Contact Button (Desktop) & Hamburger Toggle (Mobile) -->
+          <div class="flex items-center gap-2.5 justify-self-end">
             <NuxtLink
               to="/booking"
+              class="hidden rounded-full border border-white/25 bg-[#19191b] px-4 py-2.5 text-sm font-semibold text-white transition-colors hover:border-[#f97316] hover:bg-[#f97316] hover:text-black sm:px-5 md:inline-block"
+            >
+              Plan a ride
+            </NuxtLink>
+
+            <NuxtLink
+              :to="{ path: '/booking', hash: '#contact-info' }"
               class="hidden rounded-full bg-[#f97316] px-4 py-2.5 text-sm font-semibold text-black transition-colors hover:bg-[#ea580c] sm:px-5 md:inline-block"
+              @click="scrollToContactInfo"
             >
               Contact us
             </NuxtLink>
@@ -231,8 +260,8 @@ watch(() => route.path, () => {
           v-if="isMobileMenuOpen"
           class="
             absolute inset-x-0 top-20 z-50 overflow-hidden rounded-3xl
-            bg-black/95 p-6 text-white backdrop-blur-xl border border-white/15
-            shadow-2xl
+            border border-white/15 bg-black/95 p-6 text-white shadow-2xl
+            backdrop-blur-xl
             md:hidden
           "
         >
@@ -240,7 +269,7 @@ watch(() => route.path, () => {
             <NuxtLink
               to="/"
               class="rounded-2xl px-4 py-3 text-base font-medium transition-colors"
-              :class="route.path === '/' ? 'bg-[#f97316] text-black font-semibold' : 'hover:bg-white/10'"
+              :class="route.path === '/' ? 'bg-[#f97316] font-semibold text-black' : 'hover:bg-white/10'"
               @click="isMobileMenuOpen = false"
             >
               Home
@@ -249,7 +278,7 @@ watch(() => route.path, () => {
             <NuxtLink
               to="/services"
               class="rounded-2xl px-4 py-3 text-base font-medium transition-colors"
-              :class="route.path === '/services' ? 'bg-[#f97316] text-black font-semibold' : 'hover:bg-white/10'"
+              :class="route.path === '/services' ? 'bg-[#f97316] font-semibold text-black' : 'hover:bg-white/10'"
               @click="isMobileMenuOpen = false"
             >
               Our Services
@@ -258,7 +287,7 @@ watch(() => route.path, () => {
             <NuxtLink
               to="/destinations"
               class="rounded-2xl px-4 py-3 text-base font-medium transition-colors"
-              :class="route.path === '/destinations' ? 'bg-[#f97316] text-black font-semibold' : 'hover:bg-white/10'"
+              :class="route.path === '/destinations' ? 'bg-[#f97316] font-semibold text-black' : 'hover:bg-white/10'"
               @click="isMobileMenuOpen = false"
             >
               Destinations
@@ -267,7 +296,7 @@ watch(() => route.path, () => {
             <NuxtLink
               to="/about"
               class="rounded-2xl px-4 py-3 text-base font-medium transition-colors"
-              :class="route.path === '/about' ? 'bg-[#f97316] text-black font-semibold' : 'hover:bg-white/10'"
+              :class="route.path === '/about' ? 'bg-[#f97316] font-semibold text-black' : 'hover:bg-white/10'"
               @click="isMobileMenuOpen = false"
             >
               About Us
@@ -276,11 +305,24 @@ watch(() => route.path, () => {
             <NuxtLink
               to="/booking"
               class="
-                mt-2 flex items-center justify-center rounded-2xl bg-[#f97316]
+                mt-2 flex items-center justify-center rounded-2xl border
+                border-white/25 bg-[#19191b] px-5 py-3.5 text-base
+                font-semibold text-white transition-colors
+                hover:border-[#f97316] hover:bg-[#f97316] hover:text-black
+              "
+              @click="isMobileMenuOpen = false"
+            >
+              Plan a ride
+            </NuxtLink>
+
+            <NuxtLink
+              :to="{ path: '/booking', hash: '#contact-info' }"
+              class="
+                flex items-center justify-center rounded-2xl bg-[#f97316]
                 px-5 py-3.5 text-base font-semibold text-black
                 transition-colors hover:bg-[#ea580c]
               "
-              @click="isMobileMenuOpen = false"
+              @click="scrollToContactInfo"
             >
               Contact Us
             </NuxtLink>
@@ -493,7 +535,15 @@ watch(() => route.path, () => {
             <li><NuxtLink to="/" class="hover:text-[#f97316]">HOME</NuxtLink></li>
             <li><NuxtLink to="/services" class="hover:text-[#f97316]">SERVICES</NuxtLink></li>
             <li><NuxtLink to="/destinations" class="hover:text-[#f97316]">DESTINATIONS</NuxtLink></li>
-            <li><NuxtLink to="/booking" class="hover:text-[#f97316]">CONTACT US</NuxtLink></li>
+            <li>
+              <NuxtLink
+                :to="{ path: '/booking', hash: '#contact-info' }"
+                class="hover:text-[#f97316]"
+                @click="scrollToContactInfo"
+              >
+                CONTACT US
+              </NuxtLink>
+            </li>
           </ul>
 
           <ul class="space-y-4 text-xs font-semibold tracking-wider text-white">
@@ -502,25 +552,27 @@ watch(() => route.path, () => {
           </ul>
         </div>
 
-        <!-- Right Column: Newsletter & Social Icons -->
+        <!-- Right Column: Plan your island journey & Button -->
         <div class="lg:col-span-4">
           <h3 class="text-sm font-bold tracking-wide text-white">
-            Join Our Newsletter
+            Plan your island journey
           </h3>
           <p class="mt-2 text-xs text-white/65">
-            Keep up to date with everything Lankan Rides
+            Connect with our local team to organize your private transfer or island tour.
           </p>
 
           <div class="mt-4">
-            <input
-              type="email"
-              placeholder="Enter your email"
+            <NuxtLink
+              to="/booking"
               class="
-                w-full rounded-xl border border-white/10 bg-[#161618] px-4 py-3
-                text-xs text-white placeholder-white/40 outline-none
-                focus:border-[#f97316]
+                inline-flex items-center justify-center rounded-full
+                bg-[#f97316] px-6 py-3 text-xs font-semibold text-black
+                transition-colors
+                hover:bg-[#ea580c] hover:text-white
               "
-            />
+            >
+              Plan a ride →
+            </NuxtLink>
           </div>
 
           <!-- Social Icons -->
