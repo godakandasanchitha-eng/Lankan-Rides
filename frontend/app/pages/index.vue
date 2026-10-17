@@ -145,9 +145,9 @@ function publicAsset(path: string) {
 </script>
 
 <template>
-  <!-- Hero -->
+  <!-- Hero (Laptop viewport optimized height without unnecessary scroll) -->
   <section
-    class="relative isolate mx-0 my-5 min-h-[85svh] overflow-hidden rounded-3xl md:mx-3 xl:mx-4"
+    class="relative isolate mx-0 my-4 h-[78vh] min-h-[550px] overflow-hidden rounded-3xl md:mx-3 xl:mx-4"
   >
     <video
       class="absolute inset-0 z-0 size-full object-cover"
@@ -166,33 +166,33 @@ function publicAsset(path: string) {
     <div class="absolute inset-0 z-10 bg-black/40"></div>
 
     <div
-      class="relative z-20 mx-auto flex min-h-[85svh] max-w-7xl items-center px-6 pt-1 pb-32 lg:px-16"
+      class="relative z-20 mx-auto flex h-full max-w-7xl items-center px-6 pt-1 pb-16 lg:px-16"
     >
       <div class="mx-auto max-w-2xl text-center text-white">
         <p class="text-xs font-semibold uppercase tracking-[0.2em] text-[#f97316]">
           Private rides · Local knowledge
         </p>
 
-        <h1 class="mt-5 text-4xl font-semibold leading-tight md:text-5xl">
+        <h1 class="mt-4 text-3xl font-semibold leading-tight sm:text-4xl md:text-5xl">
           Discover Sri Lanka,
           <span class="text-[#f97316]">one ride at a time.</span>
         </h1>
 
-        <p class="mx-auto mt-6 max-w-xl text-base leading-7 text-white/85 md:text-lg">
+        <p class="mx-auto mt-4 max-w-xl text-sm leading-6 text-white/85 sm:text-base md:text-lg">
           From airport pickups to island tours, explore Sri Lanka with a trusted local driver.
         </p>
 
-        <div class="mt-8 flex flex-wrap justify-center gap-4">
+        <div class="mt-6 flex flex-wrap justify-center gap-4">
           <NuxtLink
             to="/booking"
-            class="rounded-full border border-transparent bg-[#f97316] px-6 py-4 font-semibold text-[#18392d] transition-colors hover:border-white hover:bg-transparent hover:text-white focus:outline-none focus:ring-2 focus:ring-[#f97316] focus:ring-offset-2"
+            class="rounded-full border border-transparent bg-[#f97316] px-6 py-3.5 font-semibold text-[#18392d] transition-colors hover:border-white hover:bg-transparent hover:text-white focus:outline-none focus:ring-2 focus:ring-[#f97316] focus:ring-offset-2"
           >
             Plan your ride
           </NuxtLink>
 
           <NuxtLink
             to="/destinations"
-            class="rounded-full border border-white/70 px-6 py-4 font-semibold text-white transition-colors hover:border-[#f97316] hover:bg-[#f97316] hover:text-black"
+            class="rounded-full border border-white/70 px-6 py-3.5 font-semibold text-white transition-colors hover:border-[#f97316] hover:bg-[#f97316] hover:text-black"
           >
             Explore destinations
           </NuxtLink>

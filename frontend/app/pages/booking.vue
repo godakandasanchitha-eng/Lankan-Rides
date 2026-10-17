@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { reactive, ref, nextTick } from 'vue'
+import { reactive, ref } from 'vue'
 
 const { app } = useRuntimeConfig()
 
@@ -56,7 +56,6 @@ function openMapModal(type: 'pickup' | 'dropoff') {
 
 function updateMapQuery(locationName: string) {
   const encodedQuery = encodeURIComponent(`${locationName}, Sri Lanka`)
-  // Official Google Maps Embed search endpoint (no API key required for basic embed queries)
   googleMapEmbedUrl.value = `https://www.google.com/maps?q=${encodedQuery}&output=embed`
 }
 
@@ -99,9 +98,9 @@ async function submitBooking() {
 </script>
 
 <template>
-  <!-- Contact Us Hero Section -->
+  <!-- Contact Us Hero Section (Laptop viewport optimized height) -->
   <section
-    class="relative isolate mx-0 my-5 min-h-[75svh] overflow-hidden rounded-3xl md:mx-3 xl:mx-4"
+    class="relative isolate mx-0 my-4 h-[78vh] min-h-[550px] overflow-hidden rounded-3xl md:mx-3 xl:mx-4"
   >
     <img
       :src="publicAsset('/Contact-us.webp')"
@@ -135,7 +134,7 @@ async function submitBooking() {
     <!-- Center-Bottom Aligned Eyebrow & Title -->
     <div
       class="
-        relative z-20 mx-auto flex min-h-[75svh] max-w-7xl items-end
+        relative z-20 mx-auto flex h-full max-w-7xl items-end
         justify-center px-6 pb-12
         md:pb-16
         lg:px-16
@@ -146,7 +145,7 @@ async function submitBooking() {
           Contact Us
         </p>
 
-        <h1 class="mt-3 text-4xl font-semibold leading-tight md:text-6xl">
+        <h1 class="mt-3 text-3xl font-semibold leading-tight sm:text-4xl md:text-6xl">
           Let’s plan your ride across Sri Lanka.
         </h1>
       </div>

@@ -124,9 +124,9 @@ function toggleShowMore() {
 </script>
 
 <template>
-  <!-- Hero Carousel -->
+  <!-- Hero Carousel (Laptop viewport optimized height without unnecessary scroll) -->
   <section
-    class="relative isolate mx-0 my-5 min-h-[85svh] overflow-hidden rounded-3xl md:mx-3 xl:mx-4"
+    class="relative isolate mx-0 my-4 h-[78vh] min-h-[550px] overflow-hidden rounded-3xl md:mx-3 xl:mx-4"
   >
     <div class="absolute inset-0 z-0 h-full w-full">
       <img
@@ -201,7 +201,7 @@ function toggleShowMore() {
 
     <div
       class="
-        relative z-20 mx-auto flex min-h-[85svh] max-w-7xl items-end
+        relative z-20 mx-auto flex h-full max-w-7xl items-end
         justify-center px-6 pb-12
         md:pb-16
         lg:px-16
@@ -212,7 +212,7 @@ function toggleShowMore() {
           {{ destinations[currentSlide]?.eyebrow }}
         </p>
 
-        <h1 class="mt-3 text-4xl font-semibold leading-tight md:text-6xl">
+        <h1 class="mt-3 text-3xl font-semibold leading-tight sm:text-4xl md:text-6xl">
           {{ destinations[currentSlide]?.name }}
         </h1>
       </div>

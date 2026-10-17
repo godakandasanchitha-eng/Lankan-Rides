@@ -95,9 +95,9 @@ function publicAsset(path: string) {
 </script>
 
 <template>
-  <!-- Hero -->
+  <!-- Hero (Laptop viewport optimized height without unnecessary scroll) -->
   <section
-    class="relative isolate mx-0 my-5 min-h-[85svh] overflow-hidden rounded-3xl md:mx-3 xl:mx-4"
+    class="relative isolate mx-0 my-4 h-[78vh] min-h-[550px] overflow-hidden rounded-3xl md:mx-3 xl:mx-4"
   >
     <video
       class="absolute inset-0 z-0 size-full object-cover"
@@ -116,18 +116,18 @@ function publicAsset(path: string) {
     <div class="absolute inset-0 z-10 bg-black/40"></div>
 
     <div
-      class="relative z-20 mx-auto flex min-h-[85svh] max-w-7xl items-end justify-center px-6 pb-12 pt-16 md:pb-16 lg:px-16"
+      class="relative z-20 mx-auto flex h-full max-w-7xl items-end justify-center px-6 pb-12 pt-16 lg:px-16"
     >
       <div class="mx-auto max-w-2xl text-center text-white">
         <p class="text-xs font-semibold uppercase tracking-[0.2em] text-[#f97316]">
           Our services
         </p>
 
-        <h1 class="mt-5 text-4xl font-semibold leading-tight md:text-5xl">
+        <h1 class="mt-4 text-3xl font-semibold leading-tight sm:text-4xl md:text-5xl">
           The ride is <span class="text-[#f97316]">part of the trip.</span>
         </h1>
 
-        <p class="mx-auto mt-6 max-w-xl text-base leading-7 text-white/85 md:text-lg">
+        <p class="mx-auto mt-4 max-w-xl text-sm leading-6 text-white/85 sm:text-base md:text-lg">
           From a simple airport pickup to a week exploring the island, travel with a local driver and a plan that can flex.
         </p>
       </div>

@@ -93,7 +93,7 @@ const faqList = [
     </div>
   </section>
 
-  <!-- 2nd Section: About Lankan Rides Collage Section (Responsive Bento Grid) -->
+  <!-- 2nd Section: About Lankan Rides Collage Section (Device-Responsive Bento Grid) -->
   <section class="bg-white px-5 py-16 text-[#20231f] md:px-8 md:py-24">
     <div class="mx-auto max-w-7xl text-center">
       <h2 class="text-3xl font-bold tracking-tight text-[#20231f] md:text-4xl lg:text-5xl">
@@ -103,7 +103,7 @@ const faqList = [
         Lankan Rides is a team of passionate local drivers dedicated to sharing Sri Lanka through safe, comfortable, and unhurried private journeys.
       </p>
 
-      <!-- Responsive Grid: 1 col on mobile, 2 cols on tablet (md), 3 cols on desktop (lg) -->
+      <!-- Responsive Grid Layout: 1 col on mobile, 2 cols on tablet, 3 cols on desktop -->
       <div class="mt-12 grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3 lg:items-center">
         <!-- Left Column: 2 Images Side-by-Side on Tablet, Stacked on Desktop -->
         <div class="grid grid-cols-2 gap-4 md:col-span-2 lg:col-span-1 lg:flex lg:flex-col lg:gap-6">

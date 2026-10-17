@@ -25,9 +25,9 @@ if (!destination.value) {
 
 <template>
   <div v-if="destination">
-    <!-- Destination Hero -->
+    <!-- Destination Hero (Laptop viewport optimized height without unnecessary scroll) -->
     <section
-      class="relative isolate mx-0 my-5 min-h-[75svh] overflow-hidden rounded-3xl md:mx-3 xl:mx-4"
+      class="relative isolate mx-0 my-4 h-[78vh] min-h-[550px] overflow-hidden rounded-3xl md:mx-3 xl:mx-4"
     >
       <img
         :src="publicAsset(destination.image)"
@@ -61,7 +61,7 @@ if (!destination.value) {
       <!-- Center-Bottom Aligned Eyebrow, Title & Caption -->
       <div
         class="
-          relative z-20 mx-auto flex min-h-[75svh] max-w-7xl items-end
+          relative z-20 mx-auto flex h-full max-w-7xl items-end
           justify-center px-6 pb-12
           md:pb-16
           lg:px-16
@@ -72,11 +72,11 @@ if (!destination.value) {
             {{ destination.eyebrow }}
           </p>
 
-          <h1 class="mt-3 text-4xl font-semibold leading-tight md:text-6xl">
+          <h1 class="mt-3 text-3xl font-semibold leading-tight sm:text-4xl md:text-6xl">
             {{ destination.name }}
           </h1>
 
-          <p class="mt-4 text-base leading-7 text-white/85 md:text-lg">
+          <p class="mt-4 text-sm leading-6 text-white/85 sm:text-base md:text-lg">
             {{ destination.caption }}
           </p>
         </div>
@@ -321,7 +321,7 @@ if (!destination.value) {
             </div>
           </div>
 
-          <!-- Right Column: Details Sidebar Card (Drop-down arrows removed) -->
+          <!-- Right Column: Details Sidebar Card -->
           <aside class="rounded-2xl border border-[#eceae4] bg-white p-6 shadow-sm lg:col-span-4">
             <h3 class="text-lg font-medium text-[#20231f]">
               Details
