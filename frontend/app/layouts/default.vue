@@ -11,6 +11,28 @@ function publicAsset(path: string) {
   return `${app.baseURL}${path.replace(/^\/+/, '')}`
 }
 
+useHead({
+  title: 'Lankan Rides - Private Island Tours & Car Rental in Sri Lanka',
+  meta: [
+    {
+      name: 'description',
+      content:
+        'Explore Sri Lanka with trusted local drivers. Book airport transfers, comfortable sedans, luxury SUVs, and custom multi-day island tours with Lankan Rides.',
+    },
+  ],
+  link: [
+    {
+      rel: 'icon',
+      type: 'image/png',
+      href: publicAsset('/lankan-rides-logo.png'),
+    },
+    {
+      rel: 'apple-touch-icon',
+      href: publicAsset('/lankan-rides-logo.png'),
+    },
+  ],
+})
+
 function handleScroll() {
   const currentScrollY = window.scrollY
 
@@ -160,7 +182,7 @@ watch(
             <span class="flex size-13 shrink-0 items-center justify-center overflow-hidden rounded-full bg-white">
               <img
                 :src="publicAsset('/lankan-rides-logo.png')"
-                alt=""
+                alt="Lankan Rides Logo"
                 class="size-full object-contain"
               />
             </span>
