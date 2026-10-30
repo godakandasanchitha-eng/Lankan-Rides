@@ -11,6 +11,8 @@ function publicAsset(path: string) {
   return `${app.baseURL}${path.replace(/^\/+/, '')}`
 }
 
+const faviconHref = ref(publicAsset('/lankan-rides-logo.png'))
+
 useHead({
   title: 'Lankan Rides - Private Island Tours & Car Rental in Sri Lanka',
   meta: [
@@ -24,14 +26,52 @@ useHead({
     {
       rel: 'icon',
       type: 'image/png',
-      href: publicAsset('/lankan-rides-logo.png'),
+      href: faviconHref,
     },
     {
       rel: 'apple-touch-icon',
-      href: publicAsset('/lankan-rides-logo.png'),
+      href: faviconHref,
     },
   ],
 })
+
+// Automatically crops lankan-rides-logo.png into a crisp circle for the browser tab favicon
+function generateRoundedFavicon() {
+  const img = new Image()
+  img.crossOrigin = 'anonymous'
+  img.src = publicAsset('/lankan-rides-logo.png')
+
+  img.onload = () => {
+    const size = 128
+    const canvas = document.createElement('canvas')
+    canvas.width = size
+    canvas.height = size
+    const ctx = canvas.getContext('2d')
+    if (!ctx) return
+
+    // Create circular mask
+    ctx.beginPath()
+    ctx.arc(size / 2, size / 2, size / 2, 0, Math.PI * 2)
+    ctx.closePath()
+    ctx.clip()
+
+    // Fill circular background in white (matching the navbar logo badge)
+    ctx.fillStyle = '#ffffff'
+    ctx.fillRect(0, 0, size, size)
+
+    // Center and fit the logo image inside the circle
+    const scale = Math.min(size / img.width, size / img.height)
+    const drawWidth = img.width * scale
+    const drawHeight = img.height * scale
+    const offsetX = (size - drawWidth) / 2
+    const offsetY = (size - drawHeight) / 2
+
+    ctx.drawImage(img, offsetX, offsetY, drawWidth, drawHeight)
+
+    // Update the reactive favicon URL
+    faviconHref.value = canvas.toDataURL('image/png')
+  }
+}
 
 function handleScroll() {
   const currentScrollY = window.scrollY
@@ -130,6 +170,7 @@ function getCardClasses(index: number) {
 }
 
 onMounted(() => {
+  generateRoundedFavicon()
   previousScrollY = window.scrollY
   window.addEventListener('scroll', handleScroll, { passive: true })
 
