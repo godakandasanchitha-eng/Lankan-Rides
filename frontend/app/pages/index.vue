@@ -223,20 +223,20 @@ function publicAsset(path: string) {
                   {{ vehicle.subtitle }}
                 </p>
               </div>
-              <div class="flex items-center gap-1 text-sm font-semibold text-[#20231f]">
+              <div class="flex items-center gap-1 text-sm font-semibold text-[#20231f] shrink-0">
                 <span class="text-amber-500">★</span>
                 <span>{{ vehicle.rating }}</span>
                 <span class="text-xs text-[#6b6d68]">({{ vehicle.reviews }})</span>
               </div>
             </div>
 
-            <!-- Car Image Container -->
-            <div class="relative my-4 overflow-hidden rounded-2xl bg-[#f5f3ed]">
+            <!-- Car Image Container (Pure white background, zoomed out using object-contain) -->
+            <div class="relative my-4 flex h-44 items-center justify-center overflow-hidden rounded-2xl bg-white p-2 sm:h-48">
               <img
                 :src="publicAsset(vehicle.image)"
                 :alt="vehicle.name"
                 loading="lazy"
-                class="h-48 w-full rounded-2xl object-cover transition duration-500 group-hover:scale-105 sm:h-52"
+                class="h-full w-full rounded-xl object-contain object-center transition duration-500 group-hover:scale-105"
               />
             </div>
 
