@@ -1,6 +1,4 @@
 <script setup lang="ts">
-import { ref } from 'vue'
-
 const destinations = [
   {
     name: 'Ella',
@@ -81,45 +79,6 @@ const vehicles = [
     reviews: '210+',
     image: '/Van.webp',
     description: 'High-roof comfort with ample luggage space for family tours and groups.',
-  },
-]
-
-const testimonials = [
-  {
-    name: 'Nadeesha P.',
-    detail: 'Family holiday · Colombo',
-    quote:
-      'Our driver made the trip feel easy from the airport pickup to our last stop. We loved being able to take the journey at our own pace.',
-  },
-  {
-    name: 'Daniel M.',
-    detail: 'Holiday traveler · Australia',
-    quote:
-      'The hill country drive was a highlight of our visit. The scenery was beautiful, and having a local driver made the day much more relaxed.',
-  },
-  {
-    name: 'Amara & James',
-    detail: 'Couple’s trip · United Kingdom',
-    quote:
-      'We had a comfortable ride and enjoyed stopping for photos along the way. It was a lovely way to see more of Sri Lanka.',
-  },
-  {
-    name: 'Ruwan S.',
-    detail: 'Business traveler · Kandy',
-    quote:
-      'Booking our transfer was straightforward, and the ride was comfortable. It made getting to our destination after a long flight much easier.',
-  },
-  {
-    name: 'Sophie L.',
-    detail: 'First visit to Sri Lanka · Singapore',
-    quote:
-      'I appreciated the flexibility to adjust our route. We got to explore places we might have missed if we had followed a fixed schedule.',
-  },
-  {
-    name: 'Mila T.',
-    detail: 'Family holiday · Germany',
-    quote:
-      'A comfortable ride, a beautiful route, and a relaxed day for our family. We came away with some wonderful memories.',
   },
 ]
 

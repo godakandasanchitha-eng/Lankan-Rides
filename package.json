@@ -1,10 +1,12 @@
 {
   "name": "lankan-rides",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "description": "Lankan Rides - Private Island Tours & Car Rental in Sri Lanka",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "npm --prefix frontend run dev",
+    "dev:backend": "node backend/server.js",
+    "build": "npm --prefix frontend run build",
+    "typecheck": "npm --prefix frontend run typecheck"
   },
   "repository": {
     "type": "git",
@@ -13,7 +15,6 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "type": "commonjs",
   "bugs": {
     "url": "https://github.com/godakandasanchitha-eng/Lankan-Rides/issues"
   },
