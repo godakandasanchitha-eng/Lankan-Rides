@@ -551,8 +551,7 @@ async function submitBooking() {
             Working Hours
           </h2>
           <p class="mt-2 text-xs leading-6 text-[#6b6d68]">
-            Daily: 6am – 10pm<br />
-            24/7 Airport Transfers
+            24/7
           </p>
         </div>
 

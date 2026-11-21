@@ -93,7 +93,7 @@ const faqList = [
     </div>
   </section>
 
-  <!-- 2nd Section: About Lankan Rides Collage Section (Device-Responsive Bento Grid) -->
+  <!-- 2nd Section: About Lankan Rides Collage Section (Aligned Virtual Rectangle Bento Grid) -->
   <section class="bg-white px-5 py-16 text-[#20231f] md:px-8 md:py-24">
     <div class="mx-auto max-w-7xl text-center">
       <h2 class="text-3xl font-bold tracking-tight text-[#20231f] md:text-4xl lg:text-5xl">
@@ -103,43 +103,52 @@ const faqList = [
         Lankan Rides is a team of passionate local drivers dedicated to sharing Sri Lanka through safe, comfortable, and unhurried private journeys.
       </p>
 
-      <!-- Responsive Grid Layout: 1 col on mobile, 2 cols on tablet, 3 cols on desktop -->
-      <div class="mt-12 grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3 lg:items-center">
-        <!-- Left Column: 2 Images Side-by-Side on Tablet, Stacked on Desktop -->
-        <div class="grid grid-cols-2 gap-4 md:col-span-2 lg:col-span-1 lg:flex lg:flex-col lg:gap-6">
-          <div class="w-full overflow-hidden rounded-3xl bg-[#20231f] shadow-sm">
+      <!-- Responsive Grid Layout: Aligned top-to-bottom across all 3 columns on desktop -->
+      <div class="mt-12 grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3 lg:items-stretch">
+        <!-- Left Column: 2 Images Side-by-Side on Tablet, Equal-Height Stacked Rows on Desktop -->
+        <div class="grid grid-cols-2 gap-4 md:col-span-2 lg:col-span-1 lg:grid-cols-1 lg:grid-rows-2 lg:gap-6">
+          <div class="aspect-[4/3] w-full overflow-hidden rounded-3xl bg-[#20231f] shadow-md lg:aspect-auto lg:h-full">
             <img
               :src="publicAsset('/Services-1.webp')"
               alt="Coastal road trip SUV transfer"
-              class="w-full h-auto aspect-[4/3] object-cover object-center transition duration-500 hover:scale-105"
+              class="h-full w-full object-cover object-center transition duration-500 hover:scale-105"
             />
           </div>
-          <div class="w-full overflow-hidden rounded-3xl bg-[#20231f] shadow-sm">
+          <div class="aspect-[4/3] w-full overflow-hidden rounded-3xl bg-[#20231f] shadow-md lg:aspect-auto lg:h-full">
             <img
               :src="publicAsset('/Services-2.webp')"
               alt="Friendly local driver greeting guests"
-              class="w-full h-auto aspect-[4/3] object-cover object-center transition duration-500 hover:scale-105"
+              class="h-full w-full object-cover object-center transition duration-500 hover:scale-105"
             />
           </div>
         </div>
 
-        <!-- Center Column (Dark Card - Spans full width on tablet) -->
+        <!-- Center Column: 3D Dark Card (Grid lines removed, layered 3D lighting, bevel & depth) -->
         <div
           class="
-            relative isolate flex flex-col justify-between overflow-hidden
-            rounded-3xl bg-[#141416] p-8 text-white shadow-xl w-full
+            relative isolate flex w-full flex-col justify-between overflow-hidden
+            rounded-3xl border border-white/15 border-t-white/30 border-b-black
+            bg-gradient-to-b from-[#26272c] via-[#16171a] to-[#0b0b0d]
+            p-8 text-white
+            shadow-[inset_0_1px_1px_rgba(255,255,255,0.25),inset_0_-8px_20px_rgba(0,0,0,0.75),0_24px_48px_-12px_rgba(0,0,0,0.45),0_10px_20px_-6px_rgba(0,0,0,0.3)]
             md:col-span-2 md:min-h-[500px] md:p-10
-            lg:col-span-1 lg:min-h-[580px]
+            lg:col-span-1 lg:min-h-[560px]
           "
         >
-          <!-- Subtle Grid Background Pattern -->
+          <!-- Subtle top-center ambient 3D sheen -->
           <div
-            class="absolute inset-0 -z-10 opacity-15"
-            style="background-image: linear-gradient(to right, #ffffff 1px, transparent 1px), linear-gradient(to bottom, #ffffff 1px, transparent 1px); background-size: 40px 40px;"
+            class="pointer-events-none absolute inset-x-0 top-0 -z-10 h-40 bg-gradient-to-b from-white/[0.07] to-transparent"
           ></div>
 
-          <!-- Top Icon -->
-          <div class="mx-auto flex size-12 items-center justify-center rounded-full bg-white/10 text-white">
+          <!-- Top 3D Raised Icon Badge -->
+          <div
+            class="
+              mx-auto flex size-13 items-center justify-center rounded-full
+              border border-white/20 bg-gradient-to-b from-white/20 to-white/5
+              text-white
+              shadow-[inset_0_1px_0_rgba(255,255,255,0.35),0_8px_16px_rgba(0,0,0,0.45)]
+            "
+          >
             <svg
               xmlns="http://www.w3.org/2000/svg"
               class="size-6"
@@ -158,7 +167,7 @@ const faqList = [
 
           <!-- Center Content -->
           <div class="my-auto py-6">
-            <h3 class="text-2xl font-bold tracking-tight md:text-3xl">
+            <h3 class="text-2xl font-bold tracking-tight drop-shadow-sm md:text-3xl">
               Local Drivers Committed to Real Hospitality
             </h3>
             <p class="mt-4 text-sm leading-6 text-white/80 md:text-base">
@@ -166,15 +175,17 @@ const faqList = [
             </p>
           </div>
 
-          <!-- Bottom Button -->
+          <!-- Bottom 3D Button -->
           <div>
             <NuxtLink
               to="/booking"
               class="
                 inline-flex items-center justify-center rounded-full
-                bg-[#f97316] px-6 py-3.5 text-sm font-semibold text-black
-                transition-colors
-                hover:bg-[#ea580c] hover:text-white
+                bg-gradient-to-b from-[#fb852e] to-[#ea580c]
+                px-6 py-3.5 text-sm font-semibold text-black
+                shadow-[inset_0_1px_0_rgba(255,255,255,0.45),0_8px_20px_rgba(249,115,22,0.35)]
+                transition-all duration-200
+                hover:-translate-y-0.5 hover:from-[#f97316] hover:to-[#dc4c05] hover:text-white
               "
             >
               More about us →
@@ -182,20 +193,20 @@ const faqList = [
           </div>
         </div>
 
-        <!-- Right Column: 2 Images Side-by-Side on Tablet, Stacked on Desktop -->
-        <div class="grid grid-cols-2 gap-4 md:col-span-2 lg:col-span-1 lg:flex lg:flex-col lg:gap-6">
-          <div class="w-full overflow-hidden rounded-3xl bg-[#20231f] shadow-sm">
+        <!-- Right Column: 2 Images Side-by-Side on Tablet, Equal-Height Stacked Rows on Desktop -->
+        <div class="grid grid-cols-2 gap-4 md:col-span-2 lg:col-span-1 lg:grid-cols-1 lg:grid-rows-2 lg:gap-6">
+          <div class="aspect-[4/3] w-full overflow-hidden rounded-3xl bg-[#20231f] shadow-md lg:aspect-auto lg:h-full">
             <img
               :src="publicAsset('/Services-3.webp')"
               alt="Sigiriya Rock Fortress"
-              class="w-full h-auto aspect-[4/3] object-cover object-center transition duration-500 hover:scale-105"
+              class="h-full w-full object-cover object-center transition duration-500 hover:scale-105"
             />
           </div>
-          <div class="w-full overflow-hidden rounded-3xl bg-[#20231f] shadow-sm">
+          <div class="aspect-[4/3] w-full overflow-hidden rounded-3xl bg-[#20231f] shadow-md lg:aspect-auto lg:h-full">
             <img
               :src="publicAsset('/Services-4.webp')"
               alt="Wildlife safari park excursion"
-              class="w-full h-auto aspect-[4/3] object-cover object-center transition duration-500 hover:scale-105"
+              class="h-full w-full object-cover object-center transition duration-500 hover:scale-105"
             />
           </div>
         </div>
