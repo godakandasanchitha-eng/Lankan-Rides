@@ -147,7 +147,7 @@ function publicAsset(path: string) {
   </section>
 
   <!-- Our vehicles -->
-  <section class="bg-white px-6 py-16 text-[#20231f] md:px-10 md:py-20">
+  <section class="bg-white px-6 pt-10 pb-16 text-[#20231f] md:px-10 md:pt-12 md:pb-20">
     <div class="mx-auto max-w-7xl">
       <div class="mx-auto max-w-2xl text-center">
         <p class="text-xs font-semibold uppercase tracking-[0.2em] text-[#bd6b28]">
@@ -165,47 +165,46 @@ function publicAsset(path: string) {
       </div>
 
       <!-- Vehicle Cards Grid -->
-      <div class="mt-10 grid gap-6 md:grid-cols-2 lg:grid-cols-4">
+      <div class="mt-8 grid gap-6 md:grid-cols-2 lg:grid-cols-4">
         <article
           v-for="vehicle in vehicles"
           :key="vehicle.name"
-          class="group overflow-hidden rounded-3xl border border-[#eceae4] bg-white p-6 shadow-sm transition duration-300 hover:-translate-y-1 hover:shadow-xl flex flex-col justify-between"
+          class="group row-span-4 grid grid-rows-subgrid gap-y-2.5 overflow-hidden rounded-3xl border border-[#eceae4] bg-white px-6 pt-5 pb-6 shadow-sm transition duration-300 hover:-translate-y-1 hover:shadow-xl"
         >
-          <div>
-            <!-- Top: Name/Subtitle & Rating -->
-            <div class="flex items-start justify-between gap-4">
-              <div>
-                <h3 class="text-xl font-bold text-[#20231f]">
-                  {{ vehicle.name }}
-                </h3>
-                <p class="mt-0.5 text-sm text-[#6b6d68]">
-                  {{ vehicle.subtitle }}
-                </p>
-              </div>
-              <div class="flex items-center gap-1 text-sm font-semibold text-[#20231f] shrink-0">
-                <span class="text-amber-500">★</span>
-                <span>{{ vehicle.rating }}</span>
-                <span class="text-xs text-[#6b6d68]">({{ vehicle.reviews }})</span>
-              </div>
+          <!-- Row 1: Top Name/Subtitle & Rating -->
+          <div class="flex items-start justify-between gap-3">
+            <div>
+              <h3 class="text-xl font-bold text-[#20231f]">
+                {{ vehicle.name }}
+              </h3>
+              <p class="mt-0.5 text-sm leading-5 text-[#6b6d68]">
+                {{ vehicle.subtitle }}
+              </p>
             </div>
-
-            <!-- Car Image Container (Pure white background, zoomed out using object-contain) -->
-            <div class="relative my-4 flex h-44 items-center justify-center overflow-hidden rounded-2xl bg-white p-2 sm:h-48">
-              <img
-                :src="publicAsset(vehicle.image)"
-                :alt="vehicle.name"
-                loading="lazy"
-                class="h-full w-full rounded-xl object-contain object-center transition duration-500 group-hover:scale-105"
-              />
+            <div class="flex shrink-0 items-center gap-1 pt-1 text-sm font-semibold text-[#20231f]">
+              <span class="text-amber-500">★</span>
+              <span>{{ vehicle.rating }}</span>
+              <span class="text-xs text-[#6b6d68]">({{ vehicle.reviews }})</span>
             </div>
-
-            <p class="text-xs text-[#6b6d68] mb-3">
-              {{ vehicle.description }}
-            </p>
           </div>
 
-          <!-- Action Button -->
-          <div class="mt-5">
+          <!-- Row 2: Car Image Container (Reduced top spacing while keeping full car size and baseline alignment) -->
+          <div class="relative flex h-32 items-end justify-center overflow-hidden rounded-2xl bg-white px-2 pb-1 sm:h-36">
+            <img
+              :src="publicAsset(vehicle.image)"
+              :alt="vehicle.name"
+              loading="lazy"
+              class="h-44 w-full object-contain object-bottom transition duration-500 group-hover:scale-105 sm:h-48"
+            />
+          </div>
+
+          <!-- Row 3: Description -->
+          <p class="text-xs leading-5 text-[#6b6d68]">
+            {{ vehicle.description }}
+          </p>
+
+          <!-- Row 4: Action Button -->
+          <div class="pt-1">
             <NuxtLink
               to="/booking"
               class="flex w-full items-center justify-center rounded-2xl bg-[#20231f] py-4 text-center font-semibold text-white transition-colors hover:bg-[#f97316] hover:text-black focus:outline-none focus:ring-2 focus:ring-[#f97316] focus:ring-offset-2"
